@@ -1,0 +1,39 @@
+{
+  "title": "Preventing SQL Injection (SQLi) & AST Manipulations",
+  "description": "Understand how SQL queries are parsed into Abstract Syntax Trees (ASTs), explore Blind and Time-Based SQLi, and implement precompiled parameterizations.",
+  "learningObjectives": [
+    "Explain how raw input string concatenation alters the query parser's Abstract Syntax Tree (AST).",
+    "Differentiate Boolean-Based Blind SQLi from Time-Based Blind SQLi payloads.",
+    "Formulate secure parameterized precompiled statements in Node.js databases drivers."
+  ],
+  "notes": "## 1. SQLi & Abstract Syntax Tree (AST) Manipulations\nWhen a database engine processes a query, it passes it through a compiler parser to generate an **Abstract Syntax Tree (AST)**. The AST dictates what parts of the query represent structural commands (e.g. `SELECT`, `WHERE`) and what parts represent literal data (e.g. strings, IDs).\n\n### AST Concatenation Vulnerability\nWhen user input is directly concatenated into a query string:\n```javascript\n// INSECURE\nconst query = `SELECT * FROM users WHERE name = '${userInput}'`;\n```\nIf `userInput` is `amit' OR '1'='1`, the parser evaluates the quote `'` as a closing literal boundary. The remaining `OR '1'='1` is parsed as a **logical condition command** rather than a string literal. This alters the AST structure itself, turning a single-row filter into a logic expression that returns all rows.\n\n---\n\n## 2. Types of SQL Injection Attacks\n1. **In-Band SQLi (Classic)**: The attacker uses the same channel of communication to launch the attack and gather results. (e.g. Union-based queries where data is returned directly on screen).\n2. **Inferential SQLi (Blind)**: No data is displayed on the screen. The attacker asks the database boolean true/false questions to guess characters one-by-one:\n   * **Boolean-Based Blind**: Payload changes page layout (e.g. if character index 1 of password hash is 'a', return page; else show empty).\n   * **Time-Based Blind**: Payloads trigger execution delays (e.g. `pg_sleep(5)` or `sleep()`). If the delay triggers, the condition is true.\n3. **Out-of-Band SQLi**: Triggered when the database is forced to make a network request (e.g., DNS lookup or HTTP request) to send data back to the attacker's server.\n\n---\n\n## 3. Mitigation: Precompiled Parameterized Statements\n**Precompilation** forces the database engine to compile the SQL query string into an AST **before** inserting user inputs. The user inputs are later bound to placeholders (represented as `?` or `$1`) as strict literal data parameters.\n\n```javascript\n// SECURE: Parameterized Query using PG Driver in Node.js\nconst query = 'SELECT * FROM users WHERE email = $1 AND password = $2';\nconst values = [req.body.email, req.body.password];\n\ndb.query(query, values, (err, res) => {\n  // Safe: Even if inputs contain quotes or OR checks, they are treated as literal strings\n});\n```\n*Note: Mongoose ODM prevents SQLi automatically by mapping inputs to schema-defined types. It treats query objects as literal filters rather than raw command queries.*\n\n---\n\n## 4. Key Takeaways\n- Concatenating strings alters the AST compiler parser tree structure, which is the root cause of SQLi.\n- **Blind SQLi** relies on boolean layouts or execution delays to extract character data bit-by-bit.\n- **Precompilation** separates command structure from data inputs, neutralizing all injected payloads.\n\n---\n\n## 5. Revision Section\n- *Question 1*: How does a database engine compile a query when using a precompiled statement?\n- *Question 2*: How can you test for a Time-Based Blind SQL injection vulnerability?\n- *Question 3*: Why is escaping quotes with regular expressions often insufficient to prevent SQL Injection?",
+  "resources": [
+    { "name": "OWASP: SQL Injection Prevention Cheat Sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html" },
+    { "name": "PortSwigger: SQLi Academy Lab Tutorials", "url": "https://portswigger.net/web-security/sql-injection" }
+  ],
+  "quiz": [
+    {
+      "question": "What is the root cause of SQL Injection vulnerabilities?",
+      "options": [
+        "Incorrect database ports configuration.",
+        "Concatenating raw inputs into query strings, which allows the parser to interpret data as executable commands.",
+        "Using slow database engines."
+      ],
+      "answer": "Concatenating raw inputs into query strings, which allows the parser to interpret data as executable commands."
+    },
+    {
+      "question": "Which attack type relies on triggering query execution delays like sleep() to extract database data?",
+      "options": ["Union-Based In-Band SQLi", "Boolean-Based Blind SQLi", "Time-Based Blind SQLi"],
+      "answer": "Time-Based Blind SQLi"
+    },
+    {
+      "question": "Why does precompilation prevent SQL Injection?",
+      "options": [
+        "It compiles the query structure into an AST before user input is evaluated, treating inputs as literal data.",
+        "It automatically encrypts user data before storage.",
+        "It rejects requests containing the word 'OR'."
+      ],
+      "answer": "It compiles the query structure into an AST before user input is evaluated, treating inputs as literal data."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "Pandas DataFrames & Aggregations",
+  "description": "Learn to manage structured tabular data using Pandas Series and DataFrames, clean missing entries, and run group aggregates.",
+  "learningObjectives": [
+    "Differentiate between NumPy arrays and Pandas DataFrames.",
+    "Solve missing data entries using filling and dropping parameters.",
+    "Formulate correct group aggregates using groupby operations."
+  ],
+  "notes": "# Summary\nPandas is a fast, powerful, and easy-to-use open-source data analysis and manipulation tool built on top of the Python programming language. It introduces two primary data structures: Series (1D) and DataFrames (2D).\n\n## DataFrames vs NumPy Arrays\n* **NumPy**: Optimized for homogenous numerical vectors. Access is index-based.\n* **Pandas**: Structured for heterogeneous tabular data (like CSVs or SQL databases). Access is column/name-based, supporting labeled axes.\n\n---\n\n## Resolving Missing Entries\nIn real datasets, missing data is represented as `NaN` (Not a Number) or `None` values.\n* **Option 1: Drop missing entries**\n  ```python\n  # Drops any row containing missing values\n  df_cleaned = df.dropna()\n  ```\n* **Option 2: Impute / Fill missing entries**\n  ```python\n  # Replaces missing values with the column mean\n  df['age'].fillna(df['age'].mean(), inplace=True)\n  ```\n\n---\n\n## Group Aggregations (Split-Apply-Combine)\nData grouping is one of the most common workflows in data science. It involves: splitting data by keys, applying aggregation functions (sum, mean, count), and combining results.\n\n$$\\text{Dataset} \\xrightarrow{\\text{Split by Key}} \\text{Groups} \\xrightarrow{\\text{Apply Mean}} \\text{Aggregated Results} \\xrightarrow{\\text{Combine}} \\text{Summary Table}$$\n\n### Python Implementation\n```python\nimport pandas as pd\n\n# Create sample dataset\ndata = {\n    'Department': ['IT', 'HR', 'IT', 'HR', 'Sales'],\n    'Salary': [90000, 60000, 95000, 65000, 80000]\n}\ndf = pd.DataFrame(data)\n\n# Group and compute average salary per department\nsummary = df.groupby('Department')['Salary'].mean().reset_index()\nprint(summary)\n```",
+  "resources": [
+    {
+      "name": "Pandas Getting Started Guide",
+      "url": "https://pandas.pydata.org/docs/getting_started/index.html"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which method is used in Pandas to group data rows by specific keys and calculate column summaries?",
+      "options": [
+        "A) group_by()",
+        "B) groupby()",
+        "C) split()",
+        "D) aggregate()"
+      ],
+      "answer": "B) groupby()"
+    },
+    {
+      "question": "What does dropna() do on a Pandas DataFrame?",
+      "options": [
+        "A) Clears the column indexes",
+        "B) Drops rows or columns containing missing or NaN values",
+        "C) Fills missing numbers with zeros",
+        "D) Deletes the entire file contents"
+      ],
+      "answer": "B) Drops rows or columns containing missing or NaN values"
+    }
+  ]
+}

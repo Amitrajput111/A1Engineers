@@ -1,0 +1,38 @@
+{
+  "title": "Node REST APIs & Middleware Pipeline",
+  "description": "Learn to write modular Node/Express backends, handle client HTTP requests, parse query parameters, and architect custom middleware chains.",
+  "learningObjectives": [
+    "Explain HTTP Request/Response cycles.",
+    "Formulate correct REST endpoint structures.",
+    "Understand the Express middleware pipeline execution flow."
+  ],
+  "notes": "# Summary\nExpress is a minimal and flexible Node.js web application framework. It provides a robust set of features for web and mobile applications, centered around a linear middleware chain.\n\n## The HTTP Request/Response Cycle\nHTTP is a stateless client-server protocol. A client sends a request containing:\n- Method (GET, POST, PUT, DELETE)\n- Headers (Content-Type, Authorization)\n- Parameters (Path parameters `/api/notes/:id` and Queries `/api/notes?category=DSA`)\n- Body (JSON payloads)\n\n---\n\n## The Express Middleware Pipeline\nMiddleware functions are functions that have access to the request object (`req`), the response object (`res`), and the next middleware function in the application’s request-response cycle (usually denoted by `next`).\n\n$$\\text{Client Request} \\rightarrow \\text{Middleware 1} \\rightarrow \\text{Middleware 2} \\rightarrow \\text{Route Handler} \\rightarrow \\text{Client Response}$$\n\nIf the current middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging.\n\n### Custom Middleware Blueprint\n```javascript\n// Custom logging middleware\nconst requestLogger = (req, res, next) => {\n  console.log(`${req.method} request received at ${req.path}`);\n  // Move to next step in chain\n  next();\n};\n\n// Global error handler middleware signature\nconst errorHandler = (err, req, res, next) => {\n  console.error(err.stack);\n  res.status(500).json({\n    success: false,\n    error: err.message || 'Server Error'\n  });\n};\n```\n\n### Endpoint Structure Guidelines\nFollowing REST constraints, paths should target collections rather than actions:\n* **GET** `/api/notes` - Retrieve all notes\n* **POST** `/api/notes` - Create a new note\n* **PUT** `/api/notes/:id` - Update specific note\n* **DELETE** `/api/notes/:id` - Remove specific note",
+  "resources": [
+    {
+      "name": "Express.js Routing Guide",
+      "url": "https://expressjs.com/en/guide/routing.html"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is the correct middleware parameter signature in Express to identify a global error handler?",
+      "options": [
+        "A) (req, res, next)",
+        "B) (err, req, res, next)",
+        "C) (err, res)",
+        "D) (req, res)"
+      ],
+      "answer": "B) (err, req, res, next)"
+    },
+    {
+      "question": "What happens if a middleware function does not call next() and does not end the response cycle?",
+      "options": [
+        "A) Express throws a compiling error",
+        "B) The request is left hanging, causing client timeout",
+        "C) The server automatically crashes",
+        "D) The next route handler is executed immediately"
+      ],
+      "answer": "B) The request is left hanging, causing client timeout"
+    }
+  ]
+}

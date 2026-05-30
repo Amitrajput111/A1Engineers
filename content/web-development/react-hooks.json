@@ -1,0 +1,39 @@
+{
+  "title": "React Component Hooks Lifecycle, Batching & Fiber Reconciliation",
+  "description": "Master component rendering lifecycles, state batching, dependency array matching rules, and custom hook extractions.",
+  "learningObjectives": [
+    "Explain how React groups state updates into single transaction batches.",
+    "Formulate setup and cleanup execution cycles for useEffect.",
+    "Create and extract a custom hook that handles window resized event listeners."
+  ],
+  "notes": "## 1. State Update Batching Mechanics\nIn React functional components, state updates do not immediately trigger a component re-render. Instead, React employs **State Batching** to group multiple state setter triggers into a single re-render cycle, preventing visual layout thrashing and improving frame rates.\n\n### Batching Example\n```jsx\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  const handleClicks = () => {\n    setCount(c => c + 1);\n    setCount(c => c + 1);\n    setCount(c => c + 1);\n    // React groups all 3 updates. The component re-renders exactly once\n  };\n\n  return <button onClick={handleClicks}>Clicks: {count}</button>;\n}\n```\n*Note: Prior to React 18, batching was limited to React event handlers. In modern React (v18/19), automatic batching occurs inside promises, timeouts, and native event handlers as well.*\n\n---\n\n## 2. The useEffect Execution Cycle & Cleanups\n`useEffect` allows you to sync component states with external systems. It runs **after** the browser paints the updated layout to the screen, ensuring that side effects do not block frame animations.\n\n### The Cleanup Function\nWhen a component re-renders or unmounts, React executes the **cleanup function** returned by the previous effect before running the new effect. This is critical for preventing memory leaks (such as leaving timers running or leaving event listeners active).\n\n```jsx\nuseEffect(() => {\n  const handleResize = () => console.log(window.innerWidth);\n  window.addEventListener('resize', handleResize);\n\n  // CLEANUP FUNCTION\n  return () => {\n    window.removeEventListener('resize', handleResize);\n  };\n}, []); // Empty array ensures this setup runs only on mount and cleanup runs on unmount\n```\n\n---\n\n## 3. Creating Custom Hooks\nA **Custom Hook** is simply a JavaScript function whose name starts with `use` and that can call other hooks. It allows you to extract component side-effect logic into reusable code blocks.\n\n### Custom window resize hook example\n```jsx\nimport { useState, useEffect } from 'react';\n\nfunction useWindowWidth() {\n  const [width, setWidth] = useState(window.innerWidth);\n\n  useEffect(() => {\n    const handleResize = () => setWidth(window.innerWidth);\n    window.addEventListener('resize', handleResize);\n    \n    return () => {\n      window.removeEventListener('resize', handleResize);\n    };\n  }, []);\n\n  return width;\n}\n```\n\n---\n\n## 4. Key Takeaways\n- State setters are batch-processed asynchronously; do not expect state values to update instantly on the next code line.\n- Always return cleanups in effects that bind event listeners, open websocket sockets, or initialize interval timers.\n- Custom hooks are modular abstractions; state variables inside custom hooks are completely isolated between components.\n\n---\n\n## 5. Revision Section\n- *Question 1*: What happens if you update state inside a useEffect without declaring a dependency array?\n- *Question 2*: How does React determine if a dependency has changed (what comparison is used)?\n- *Question 3*: Why can React hooks only be called at the top level of a component (never inside `if` or `for` loops)?",
+  "resources": [
+    { "name": "React Dev: Automatic Batching Guide", "url": "https://react.dev/blog/2022/03/29/react-v18#new-feature-automatic-batching" },
+    { "name": "Rules of Hooks: Top Level Executions", "url": "https://react.dev/reference/rules/rules-of-hooks" }
+  ],
+  "quiz": [
+    {
+      "question": "What comparison check does React use under the hood to compare dependency arrays?",
+      "options": ["Object.is()", "=== Triple Equals", "== Double Equals"],
+      "answer": "Object.is()"
+    },
+    {
+      "question": "What is the primary benefit of React's automatic batching?",
+      "options": [
+        "It speeds up file fetches.",
+        "It groups state updates together to trigger fewer component renders.",
+        "It automatically binds variables to global local storage."
+      ],
+      "answer": "It groups state updates together to trigger fewer component renders."
+    },
+    {
+      "question": "If you do not return a cleanup function in a useEffect that attaches an event listener, what could happen?",
+      "options": [
+        "React will throw a runtime syntax error.",
+        "Multiple event listeners will accumulate on every re-render, causing a memory leak.",
+        "The component will fail to compile."
+      ],
+      "answer": "Multiple event listeners will accumulate on every re-render, causing a memory leak."
+    }
+  ]
+}

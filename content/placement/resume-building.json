@@ -1,0 +1,43 @@
+{
+  "title": "ATS Resume Building, Google X-Y-Z & Interview STAR Method",
+  "description": "Construct resumes aligned to Application Tracking Systems (ATS), formulate bullet points using Google's X-Y-Z formula, and structure behavioral responses with the STAR method.",
+  "learningObjectives": [
+    "Format resumes to prevent parsing errors inside automated ATS indexing software.",
+    "Formulate impact-centric experiences points using Google's X-Y-Z resume guidelines.",
+    "Structure behavioral interview responses (conflict resolution, leadership) using the STAR framework."
+  ],
+  "notes": "## 1. ATS Parsers & Structural Limitations\nAn **Application Tracking System (ATS)** is an automated filter used by top companies to parse, index, and rank resumes by keyword relevancy. Standard parsing scripts often crash or misalign data if the document contains complex styles.\n\n### Formatting Guidelines\n- **No Columns**: Dual-column templates often merge lines horizontally, making the output unreadable to the parser.\n- **Clean Typography**: Use standard web fonts (Arial, Calibri, Helvetica, Inter). Avoid tables, graphics, text boxes, and icons.\n- **Export**: PDF format is standard, but ensure the PDF is text-selectable (not an image scan).\n\n---\n\n## 2. Google's X-Y-Z Resume Bullet Formula\nRecruiters evaluate impact, not just responsibilities. Google recommends writing resume bullet points using the **X-Y-Z Formula**:\n\n$$\\text{Accomplished [X]} \\text{ as measured by [Y], by doing [Z]}$$\n\n* **Weak (Task-focused)**: \"Wrote an API server and added auth.\"\n* **Strong (Google X-Y-Z format)**: \"Engineered a full-stack learning platform (X) reducing user session errors by 40% (Y) by implementing a JWT token rotation and secure cookie middleware in Express (Z).\"\n\n### Formulating your metrics\nUse percentages, dollar amounts, hours saved, or database query response reductions as your metric indicator `Y`.\n\n---\n\n## 3. The STAR Method for Behavioral Interviews\nTop engineering placement interviews (e.g. Amazon, Google) use behavioral questions (e.g. \"Tell me about a time you had a conflict on a team\"). Structure your responses using the **STAR Method**:\n\n| Stage | Description | Key Focus |\n| :--- | :--- | :--- |\n| **S**ituation | Set the context, explain the project, time constraint, or bug. | Keep it brief (15% of response). |\n| **T**ask | Explain the challenge and your specific responsibility. | Define the core problem clearly. |\n| **A**ction | Describe the step-by-step actions you took to solve the challenge. | Focus on what **YOU** did (65% of response). |\n| **R**esult | Outline the outcomes, metrics, and key lessons learned. | Quantify the results whenever possible. |\n\n---\n\n## 4. Key Takeaways\n- Multi-column resume layouts fail ATS parsers; keep documents single-column, clean, and text-selectable.\n- Convert bullet statements from simple tasks into impact-driven metrics using Google's X-Y-Z formula.\n- Use the **STAR** method to partition behavioral stories, focusing heavily on your actions and quantitative results.\n\n---[01]\n\n## 5. Revision Section\n- *Question 1*: How can you test if a PDF resume is readable by an ATS parser?\n- *Question 2*: How do you formulate metric percentages if your college project did not have live users?\n- *Question 3*: Why should you focus on actions rather than team achievements during behavioral interviews?",
+  "resources": [
+    { "name": "Google: Resume and Cover Letter Tips", "url": "https://www.youtube.com/watch?v=xpAZn-co1M0" },
+    { "name": "STAR Method: Interview Prep Guide", "url": "https://www.levels.fyi/blog/star-method-interview.html" }
+  ],
+  "quiz": [
+    {
+      "question": "What is the primary formatting error that causes ATS parsers to mix up resume lines?",
+      "options": [
+        "Using PDF format.",
+        "Using multi-column layouts.",
+        "Listing too many tech keywords."
+      ],
+      "answer": "Using multi-column layouts."
+    },
+    {
+      "question": "Which of the following points conforms to Google's X-Y-Z formula?",
+      "options": [
+        "Responsible for fixing bugs in the backend code.",
+        "Optimized database query response times by 30% (Y) on a React dashboard (X) by indexing MongoDB compound keys (Z).",
+        "Learned Python, React, and Node.js during my winter holidays."
+      ],
+      "answer": "Optimized database query response times by 30% (Y) on a React dashboard (X) by indexing MongoDB compound keys (Z)."
+    },
+    {
+      "question": "What should be the primary focus (taking up ~65% of the response time) when answering behavioral questions using the STAR method?",
+      "options": [
+        "Setting the Situation context.",
+        "Describing the Actions you personally took.",
+        "Explaining the Task difficulty."
+      ],
+      "answer": "Describing the Actions you personally took."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "Cycle Detection & Merge Sorted Lists",
+  "description": "Master pointer operations on linked lists, Floyd's Cycle-Finding Algorithm (Tortoise and Hare), and merging sorted nodes efficiently.",
+  "learningObjectives": [
+    "Explain Floyd's Cycle-Finding mathematical principles.",
+    "Code Tortoise and Hare pointers traversal to verify loop existence.",
+    "Merge two sorted list structures in-place in linear time."
+  ],
+  "notes": "# Summary\nThis lesson covers advanced pointer interactions in singly linked lists: detecting cycle structures in linear time with constant space and merging sorted list sequences in-place.\n\n## Cycle Detection (Floyd's Algorithm)\nIn a linked list containing a cycle structure, simple traversals run into infinite loops. We need an algorithm to identify cycles without storing visited nodes in a hash set.\n* Floyd's Cycle-Finding Algorithm uses two pointers:\n  - **Slow Pointer (`tortoise`)**: Moves one node at a time.\n  - **Fast Pointer (`hare`)**: Moves two nodes at a time.\n\n$$\\text{If a loop exists, the fast pointer will eventually catch up to the slow pointer: } \\text{slow} == \\text{fast}$$\n\n### Code Blueprint\n```javascript\nfunction hasCycle(head) {\n  if (head === null || head.next === null) {\n    return false;\n  }\n  let slow = head;\n  let fast = head;\n  \n  while (fast !== null && fast.next !== null) {\n    slow = slow.next;\n    fast = fast.next.next;\n    \n    if (slow === fast) {\n      return true; // Cycle detected\n    }\n  }\n  return false; // Reached end, no cycle\n}\n```\n\n---\n\n## Merging Two Sorted Linked Lists\nGiven the heads of two sorted lists, we wish to merge them in-place to construct a single sorted linked list output.\n* **Algorithm**: We initialize a `dummy` node to act as the root pivot. We compare values of current nodes of both lists and hook the smaller node reference to our pivot tracker.\n\n```javascript\nfunction mergeTwoLists(l1, l2) {\n  let dummy = { val: -1, next: null };\n  let curr = dummy;\n  \n  while (l1 !== null && l2 !== null) {\n    if (l1.val <= l2.val) {\n      curr.next = l1;\n      l1 = l1.next;\n    } else {\n      curr.next = l2;\n      l2 = l2.next;\n    }\n    curr = curr.next;\n  }\n  \n  // Attach remaining items\n  curr.next = l1 !== null ? l1 : l2;\n  return dummy.next;\n}\n```",
+  "resources": [
+    {
+      "name": "Cycle Finding Visual Demo",
+      "url": "https://visualgo.net/en/sssp"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is the space complexity of Floyd's Cycle-Finding Algorithm?",
+      "options": [
+        "A) O(n)",
+        "B) O(1)",
+        "C) O(log n)",
+        "D) O(n log n)"
+      ],
+      "answer": "B) O(1)"
+    },
+    {
+      "question": "Why is a dummy node used when merging two sorted lists?",
+      "options": [
+        "A) To save memory allocation",
+        "B) To act as a sentinel node that simplifies linking edge cases",
+        "C) To sort values in descending order",
+        "D) To check for cycle boundaries"
+      ],
+      "answer": "B) To act as a sentinel node that simplifies linking edge cases"
+    }
+  ]
+}

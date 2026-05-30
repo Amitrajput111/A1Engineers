@@ -1,0 +1,38 @@
+{
+  "title": "Singly Linked Lists & Reversals",
+  "description": "Learn the mechanics of pointer linking, dynamic node allocations, and how to reverse a Singly Linked List recursively and iteratively.",
+  "learningObjectives": [
+    "Identify memory footprint differences between static arrays and dynamic nodes.",
+    "Implement iterative Singly Linked List reversal using three pointers.",
+    "Implement recursive reversal of Linked Lists and draw call stacks."
+  ],
+  "notes": "# Summary\nUnlike contiguous arrays, a Linked List allocates memory dynamically. Elements (nodes) are linked together using pointer addresses. This lesson covers base layouts and list reversals.\n\n## Memory Layout comparison\n* **Arrays**: Stored in a single contiguous block of physical RAM. Lookups are `O(1)`, but insertions require shifting remaining elements `O(n)`.\n* **Linked Lists**: Nodes are scattered across the heap. Each node stores a value and a pointer reference to the next node. Lookup is `O(n)`, but node inserting is `O(1)` once the target node reference is reached.\n\n$$\\text{Node Structural Layout: } [\\text{Data}] \\rightarrow [\\text{Next Address Pointer}]$$\n\n---\n\n## Iterative Reversal Algorithm\nTo reverse a list iteratively, we maintain three pointer state addresses during traversal:\n* `prev` (initialized to `null`)\n* `curr` (initialized to `head`)\n* `next` (stored during loop iterations)\n\n### The Iterative Loop Loop\n```javascript\nfunction reverseListIterative(head) {\n  let prev = null;\n  let curr = head;\n  \n  while (curr !== null) {\n    let nextTemp = curr.next; // Save next pointer state\n    curr.next = prev;         // Reverse connection\n    prev = curr;              // Shift prev pointer forward\n    curr = nextTemp;          // Shift curr pointer forward\n  }\n  return prev; // prev will be the new head\n}\n```\n\n### Complexity\n* **Time Complexity**: `O(n)` where **n** is the number of nodes in the list.\n* **Space Complexity**: `O(1)` auxiliary space as we only re-link references.\n\n---\n\n## Recursive Reversal\nTo reverse recursively, we traverse to the tail, establish the new head reference, and link pointers backward on call-stack bubble ups.\n\n```javascript\nfunction reverseListRecursive(head) {\n  if (head === null || head.next === null) {\n    return head;\n  }\n  let newHead = reverseListRecursive(head.next);\n  head.next.next = head;\n  head.next = null;\n  return newHead;\n}\n```",
+  "resources": [
+    {
+      "name": "Linked List Visual Guide",
+      "url": "https://visualgo.net/en/list"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What pointer is returned at the end of the iterative reversal loop to act as the new head?",
+      "options": [
+        "A) curr",
+        "B) prev",
+        "C) head.next",
+        "D) null"
+      ],
+      "answer": "B) prev"
+    },
+    {
+      "question": "What is the space complexity of the recursive linked list reversal due to call stack allocations?",
+      "options": [
+        "A) O(1)",
+        "B) O(n)",
+        "C) O(log n)",
+        "D) O(n^2)"
+      ],
+      "answer": "B) O(n)"
+    }
+  ]
+}

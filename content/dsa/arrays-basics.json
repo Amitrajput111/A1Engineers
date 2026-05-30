@@ -1,0 +1,39 @@
+{
+  "title": "Arrays, Traversals & Optimal Subarray Scans",
+  "description": "Master array memory addressing mathematics, Kadane's Maximum Subarray Sum algorithm, and two-pointer boundary optimizations.",
+  "learningObjectives": [
+    "Formulate memory addressing calculations for standard 1D and 2D arrays.",
+    "Derive and code Kadane's Algorithm to find maximum subarray sums in O(n) runtime.",
+    "Optimize nested boundary scans from O(n^2) to O(n) using the two-pointer technique."
+  ],
+  "notes": "## 1. Array Memory Layout & Addressing Mathematics\nAn **Array** is a collection of homogeneous elements allocated in **contiguous memory blocks**. The base address of the array is denoted as `Base(A)`. For a 1D array where each element size is `W` bytes, the memory address of the element at index `i` is calculated using the formula:\n\n$$\\text{Address}(A[i]) = \\text{Base}(A) + i \\times W$$\n\n### Multi-dimensional Array Mapping\nFor a 2D array of dimensions $M \\times N$, elements are linearized in memory using one of two schemes:\n1. **Row-Major Order (RMO)**: Row by row. Address of $A[i][j]$ is:\n   $$\\text{Address}(A[i][j]) = \\text{Base}(A) + (i \\times N + j) \\times W$$\n2. **Column-Major Order (CMO)**: Column by column. Address of $A[i][j]$ is:\n   $$\\text{Address}(A[i][j]) = \\text{Base}(A) + (j \\times M + i) \\times W$$\n\n---\n\n## 2. Kadane's Algorithm (Maximum Subarray Sum)\n**Problem Statement**: Given an integer array `nums`, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.\n\n* **Brute Force Approach**: Check all possible subarrays. This takes $O(n^2)$ time.\n* **Optimal Approach (Kadane's)**: Iteratively update the maximum subarray sum ending at the current index. At each element, we choose to either append it to the existing subarray or start a new subarray. This is a dynamic programming state reduction ($O(n)$ time and $O(1)$ space).\n\n### Dry Run Walkthrough\nFor array `[-2, 1, -3, 4, -1, 2, 1, -5, 4]`:\n1. Initialize `max_so_far = -infinity`, `current_max = 0`\n2. At index 0 (`-2`): `current_max = max(-2, 0 + -2) = -2`. Update `max_so_far = -2`\n3. At index 1 (`1`): `current_max = max(1, -2 + 1) = 1`. Update `max_so_far = 1`\n4. At index 2 (`-3`): `current_max = max(-3, 1 + -3) = -2`. `max_so_far` remains `1`\n5. At index 3 (`4`): `current_max = max(4, -2 + 4) = 4`. Update `max_so_far = 4`\n\n```javascript\n// Optimal Kadane's Implementation in JavaScript\nfunction maxSubArray(nums) {\n  let maxSoFar = nums[0];\n  let currentMax = nums[0];\n\n  for (let i = 1; i < nums.length; i++) {\n    currentMax = Math.max(nums[i], currentMax + nums[i]);\n    maxSoFar = Math.max(maxSoFar, currentMax);\n  }\n  return maxSoFar;\n}\n```\n\n---\n\n## 3. Two Pointers Technique\nThe **Two Pointers** pattern uses two references (typically pointing to the start and end of a sorted array) to slide towards each other, reducing nesting loops from $O(n^2)$ to $O(n)$.\n\n**Common Scenario (Target Sum)**: Find if two elements in a sorted array add up to a target sum.\n```javascript\nfunction hasTargetSum(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n\n  while (left < right) {\n    const currentSum = arr[left] + arr[right];\n    if (currentSum === target) return true;\n    if (currentSum < target) {\n      left++; // Increase sum by shifting left pointer right\n    } else {\n      right--; // Decrease sum by shifting right pointer left\n    } \n  }\n  return false;\n}\n```\n\n---\n\n## 4. Key Takeaways\n- Contiguous arrays offer $O(1)$ index lookups but $O(n)$ shifts on middle insertions.\n- **Kadane's Algorithm** is the optimal $O(n)$ solver for maximum subarray sums.\n- **Two Pointers** is the standard mechanism to optimize sorted array searches.\n\n---\n\n## 5. Revision Section\n- *Question 1*: How does Row-Major order calculate 2D array offsets?\n- *Question 2*: Why does Kadane's reset the current max to the element itself if the previous sum falls below zero?\n- *Question 3*: Under what conditions can the two-pointer technique be used on unsorted arrays?",
+  "resources": [
+    { "name": "TakeUForward Kadane's Video Tutorial", "url": "https://takeuforward.org/data-structure/kadanes-algorithm-maximum-subarray-sum-in-an-array/" },
+    { "name": "GeeksforGeeks Row-Major Formula Guide", "url": "https://www.geeksforgeeks.org/calculation-of-address-of-element-of-1-d-2-d-and-3-d-arrays/" }
+  ],
+  "quiz": [
+    {
+      "question": "Which of the following describes Row-Major Order linearized mapping address calculation?",
+      "options": [
+        "Base + (j * M + i) * W",
+        "Base + (i * N + j) * W",
+        "Base + (i + j) * W"
+      ],
+      "answer": "Base + (i * N + j) * W"
+    },
+    {
+      "question": "What is the time complexity of Kadane's Algorithm?",
+      "options": ["O(n log n)", "O(n^2)", "O(n)"],
+      "answer": "O(n)"
+    },
+    {
+      "question": "Why does the Two Pointers target-sum technique require the input array to be sorted?",
+      "options": [
+        "To allow binary search splits.",
+        "So that pointer increments and decrements logically increase or decrease the current sum.",
+        "Because arrays cannot be traversed from the end otherwise."
+      ],
+      "answer": "So that pointer increments and decrements logically increase or decrease the current sum."
+    }
+  ]
+}

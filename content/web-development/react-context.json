@@ -1,0 +1,38 @@
+{
+  "title": "Context API & State Batching Mechanics",
+  "description": "Learn how React shares global states using Context Providers, updates reconciliation nodes, and batches multiple state changes.",
+  "learningObjectives": [
+    "Differentiate between props drilling and Context global providers.",
+    "Explain how React context triggers child re-renders.",
+    "Understand React state batching and updates queues in React 18+."
+  ],
+  "notes": "# Summary\nThis unit explores React context architectures, rendering triggers, and internal state batching updates to optimize rendering performances.\n\n## Context API\nReact Context provides a way to pass data through the component tree without having to pass props down manually at every level (Prop Drilling).\n\n$$\\text{Prop Drilling: } \\text{Parent} \\rightarrow \\text{Child} \\rightarrow \\text{Grandchild} \\rightarrow \\text{LeafComponent}$$\n$$\\text{Context: } \\text{Provider} \\rightarrow \\text{LeafComponent} \\text{ (Direct access)}$$\n\n* **Provider Node**: Holds data state and publishes values.\n* **Consumer Hook (`useContext`)**: Subscribes to provider value updates.\n\n### Context Triggers & Re-rendering\nWhen a provider value updates, **all** components that consume that context will re-render, even if they are wrapped in `React.memo`! To avoid excessive updates:\n1. Split contexts into distinct state and dispatcher contexts.\n2. Wrap components carefully or compute derived states with `useMemo`.\n\n---\n\n## State Batching Mechanics\nBatching is when React groups multiple state updates into a single re-render for better performance.\n\n### React 18 Automatic Batching\nIn React 18+, all updates (including promises, setTimeouts, native event handlers) are batched automatically.\n\n```javascript\nfunction handleMultipleUpdates() {\n  // Triggered concurrently\n  setCount(c => c + 1);\n  setFlag(f => !f);\n  // React triggers exactly ONE re-render at the end of stack\n}\n```\n\n### Functional State Updater Rules\nIf state updates depend on previous values, always use functional state updaters to prevent reading stale closure values:\n\n```javascript\n// INACCURATE: count is closed over, updates may collide\nsetCount(count + 1);\nsetCount(count + 1);\n\n// ACCURATE: Reads latest state parameter from update queue\nsetCount(c => c + 1);\nsetCount(c => c + 1);\n```",
+  "resources": [
+    {
+      "name": "React Hooks & Context Reference",
+      "url": "https://react.dev/reference/react"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Which hook is used to consume global provider data states in React functional components?",
+      "options": [
+        "A) useState",
+        "B) useReducer",
+        "C) useContext",
+        "D) useMemo"
+      ],
+      "answer": "C) useContext"
+    },
+    {
+      "question": "What is the primary benefit of React's state batching mechanics?",
+      "options": [
+        "A) It prevents components from rendering altogether",
+        "B) It groups multiple state updates to run in a single rendering cycles to improve speed",
+        "C) It executes async requests sequentially",
+        "D) It creates virtual DOM layouts"
+      ],
+      "answer": "B) It groups multiple state updates to run in a single rendering cycles to improve speed"
+    }
+  ]
+}

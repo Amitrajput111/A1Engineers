@@ -1,0 +1,39 @@
+{
+  "title": "NumPy Array Memory Layouts, Strides & Vectorized Broadcasting",
+  "description": "Master NumPy multidimensional array strides calculations, SIMD hardware acceleration, and shape broadcasting dimensions.",
+  "learningObjectives": [
+    "Differentiate NumPy ndarray memory maps (contiguous blocks) from Python pointer lists.",
+    "Formulate 2D indexing math using stride bytes offsets.",
+    "Calculate shape compatibility checks for vector broadcasting configurations."
+  ],
+  "notes": "## 1. The ndarray Memory Map & Strides\nA NumPy **ndarray** consists of a raw 1D block of memory combined with an index schema metadata layout. Unlike Python lists (which are arrays of pointers pointing to scattered float/int objects), an ndarray stores raw primitive numbers (e.g. 64-bit floats) consecutively in memory.\n\n### Stride Mathematics\n**Strides** are the number of bytes the indexing engine must skip in memory to jump to the next element along an axis. For a 2D array of shape `(Rows, Cols)` and item size `S` bytes:\n* In **Row-Major Order (C-contiguous)**: Jumping to the next row requires skipping `Cols * S` bytes. Strides are `(Cols * S, S)`.\n* In **Column-Major Order (F-contiguous)**: Jumping to the next column requires skipping `Rows * S` bytes. Strides are `(S, Rows * S)`.\n\n$$\\text{Address}(A[i][j]) = \\text{BaseAddress} + (i \\times \\text{Stride}[0] + j \\times \\text{Stride}[1])$$\n\n### O(1) Reshaping & Views\nBecause reshaping or transposing arrays simply alters the `shape` and `strides` metadata arrays without duplicating the underlying 1D data block, these operations run in $O(1)$ constant time!\n\n---\n\n## 2. Vectorization & SIMD Hardware Acceleration\n**Vectorization** is the practice of replacing explicit loops (like `for` loops in Python) with array expressions. NumPy offloads these operations to compiled C routines, enabling CPU hardware pipelines to execute operations in parallel using **SIMD (Single Instruction, Multiple Data)** instructions.\n\n```python\nimport numpy as np\nimport time\n\n# Dynamic Loop (Slow)\narr = np.random.rand(1000000)\nstart = time.time()\n_ = [x * 2 for x in arr]\nprint(\"Python Loop time:\", time.time() - start)\n\n# Vectorized SIMD (Fast)\nstart = time.time()\n_ = arr * 2\nprint(\"Vectorized time:\", time.time() - start) # up to 100x faster!\n```\n\n---\n\n## 3. The Broadcasting Rules\n**Broadcasting** defines how NumPy performs operations on arrays of different shapes during arithmetic calculations. NumPy compares axes dimensions starting from the trailing (rightmost) dimension, shifting leftwards. Two dimensions are compatible if:\n1. They are equal, OR\n2. One of them is exactly 1.\n\n### Broadcasting Compatibility Table\n* Array A shape: `(2, 3)`\n* Array B shape: `(3,)`  → Compatible (Array B is broadcast to `(2, 3)` by repeating its row)\n* Array A shape: `(4, 3)`\n* Array B shape: `(4, 1)` → Compatible (Array B is broadcast by repeating its column)\n* Array A shape: `(3, 2)`\n* Array B shape: `(3,)`  → **Incompatible** (Trailing dimensions `2` and `3` do not match)\n\n---\n\n## 4. Key Takeaways\n- Strides dictate byte jumps in memory; changing strides allows $O(1)$ transposition views.\n- Vectorized operations utilize SIMD instruction pipelines, bypassing slow Python runtime inspections.\n- Broadcasting matches dimensions starting from right-to-left. A dimension of size 1 can stretch to match the target axis.\n\n---\n\n## 5. Revision Section\n- *Question 1*: Why does a sliced view of a NumPy array share memory with the original parent array?\n- *Question 2*: How do C-contiguous layouts compare to F-contiguous layouts regarding cache lines efficiency?\n- *Question 3*: Can we broadcast a `(3, 1, 4)` array with a `(3, 5, 1)` array? What will be the resulting shape?",
+  "resources": [
+    { "name": "NumPy: Memory Layouts and Internals Guide", "url": "https://numpy.org/doc/stable/reference/internals.html" },
+    { "name": "Python Data Science: Vectorized Computations", "url": "https://jakevdp.github.io/PythonDataScienceHandbook/02.01-understanding-data-types.html" }
+  ],
+  "quiz": [
+    {
+      "question": "What happens in memory when you reshape a NumPy array from shape (2, 5) to (10,)?",
+      "options": [
+        "NumPy copies all elements to a new memory block.",
+        "NumPy simply modifies the metadata shape and strides arrays without copying any underlying elements.",
+        "The operation fails unless you pass a duplicate flag."
+      ],
+      "answer": "NumPy simply modifies the metadata shape and strides arrays without copying any underlying elements."
+    },
+    {
+      "question": "If a float64 array (8 bytes per item) has shape (3, 4) in Row-Major Order, what are its strides in bytes?",
+      "options": ["(8, 32)", "(32, 8)", "(8, 8)"],
+      "answer": "(32, 8)"
+    },
+    {
+      "question": "Which of the following array shape pairs is INCOMPATIBLE for broadcasting?",
+      "options": [
+        "A: (5, 4), B: (1, 4)",
+        "A: (3, 2), B: (3,)",
+        "A: (4, 1, 3), B: (1, 5, 3)"
+      ],
+      "answer": "A: (3, 2), B: (3,)"
+    }
+  ]
+}

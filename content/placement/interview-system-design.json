@@ -1,0 +1,38 @@
+{
+  "title": "System Design Basics for Placements",
+  "description": "Learn the concepts of horizontal scaling, load balancing, caching, and database replication required to solve placement system design interviews.",
+  "learningObjectives": [
+    "Differentiate between vertical and horizontal scaling.",
+    "Understand the role of Load Balancers (reverse proxies).",
+    "Identify caching strategies and cache invalidation patterns."
+  ],
+  "notes": "# Summary\nSystem design interviews verify your ability to architect high-scale, reliable, and fault-tolerant software. We focus on scaling constraints, proxies, caching layer architectures, and databases.\n\n## Horizontal vs Vertical Scaling\n* **Vertical Scaling (Scale Up)**: Adding more resources (CPU, RAM) to a single machine server. Limit: Hard physical caps, single point of failure.\n* **Horizontal Scaling (Scale Out)**: Adding more machine nodes to your server network. Requires load distribution architectures.\n\n$$\\text{Vertical: } [\\text{Server} + \\text{CPU} + \\text{RAM}]$$\n$$\\text{Horizontal: } [\\text{Server 1}] \\quad [\\text{Server 2}] \\quad [\\text{Server 3}] \\quad \\text{(Managed by Load Balancer)}$$\n\n---\n\n## Load Balancers (Reverse Proxies)\nA load balancer sits in front of your servers and routes client requests across all servers in the cluster to maximize speed and capacity utilization.\n* **Routing Algorithms**: Round Robin, Least Connections, IP Hash.\n* **Health Checks**: Periodically ping backend servers. If a server is down, the load balancer stops routing traffic to it.\n\n---\n\n## Caching Layer (In-Memory Key-Value Stores)\nCaching stores copies of frequently requested database records in RAM (e.g. using Redis) to avoid expensive database disk lookups.\n* **Cache Hit**: Requested data exists in cache. Returns instantly.\n* **Cache Miss**: Data does not exist. Fetched from database and written to cache for later.\n\n### Cache Invalidation Patterns\n* **Cache Aside**: Application queries cache first. On miss, it reads database and updates cache.\n* **Write-Through**: Application writes to cache first, which synchronously updates the database.\n* **Write-Back**: Application writes to cache, which asynchronously batch updates the database later.",
+  "resources": [
+    {
+      "name": "System Design Primer Guide",
+      "url": "https://github.com/donnemartin/system-design-primer"
+    }
+  ],
+  "quiz": [
+    {
+      "question": "What is horizontal scaling (Scale Out)?",
+      "options": [
+        "A) Upgrading the RAM of a single machine server",
+        "B) Deploying more machine nodes to split application loads",
+        "C) Changing relational databases to NoSQL collections",
+        "D) Implementing HTTP security headers"
+      ],
+      "answer": "B) Deploying more machine nodes to split application loads"
+    },
+    {
+      "question": "Which cache invalidation pattern updates the database synchronously immediately after the cache is updated?",
+      "options": [
+        "A) Cache Aside",
+        "B) Write-Back",
+        "C) Write-Through",
+        "D) Least Recently Used (LRU)"
+      ],
+      "answer": "C) Write-Through"
+    }
+  ]
+}
