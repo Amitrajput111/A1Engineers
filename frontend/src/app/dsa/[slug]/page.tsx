@@ -170,6 +170,12 @@ export default function DsaTopicPage({ params }: PageProps) {
   };
 
   useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isLoading, isAuthenticated, router]);
+
+  useEffect(() => {
     if (isAuthenticated && slug) {
       loadTopicDetails();
       if (slug === 'arrays') {
