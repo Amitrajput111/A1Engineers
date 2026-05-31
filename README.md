@@ -120,15 +120,19 @@ npm run dev
 
 ---
 
-## Deployment Playbook
+## Deployment Playbook (Vercel Unified Monorepo Setup)
 
-### Backend (Render / Heroku)
-1. Set up a Web Service on Render linking to your Git repository.
-2. In the Render Dashboard, add Environment Variables from your `.env` (ensure `NODE_ENV` is set to `production`).
-3. Set the **Build Command** to `npm install` and the **Start Command** to `node backend/server.js`.
+This project is configured to run both frontend and backend on Vercel. By leveraging Vercel's rewrite proxying, the frontend and backend appear unified under a single domain link, eliminating CORS or cross-origin session cookie blockages.
 
-### Frontend (Vercel)
-1. Create a project on Vercel and import the repository.
-2. Configure the root directory to `frontend`.
-3. In Project Settings, set the Build Command to `npm run build` and Output Directory to `.next`.
-4. In Vercel Environment Variables, set `NEXT_PUBLIC_API_URL` to your Render API URL (e.g. `https://a1-learner-api.onrender.com/api`).
+### 1. Backend Deployment (Vercel Serverless Function)
+1. Create a project in Vercel and import the repository.
+2. In the deployment configuration, set the **Root Directory** to `backend`.
+3. Set your environment variables (like `MONGODB_URI`, `JWT_SECRET`, etc.) in the project settings.
+4. The deployment will automatically compile and route incoming request payloads to `server.js` using `@vercel/node` serverless functions as configured in `backend/vercel.json`.
+
+### 2. Frontend Deployment (Next.js Application)
+1. Create another project in Vercel and import the repository.
+2. Set the **Root Directory** to `frontend`.
+3. In Project Settings, ensure the Build Command is `npm run build` and the Output Directory is `.next`.
+4. Set the backend URL inside the `frontend/vercel.json` and `frontend/next.config.ts` rewrite destination property (e.g. `https://backend-ashy-ten-31.vercel.app/api/:path*`).
+5. You do **not** need to set `NEXT_PUBLIC_API_URL` on Vercel; the client automatically resolves API fetches relatively to `/api`, which proxy-routes directly to the backend through the Vercel edge.

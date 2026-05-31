@@ -21,8 +21,29 @@ app.use(helmet({
 }));
 
 // CORS setup
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3001'
+];
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : ['http://localhost:3000', 'http://localhost:3001'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, or server-to-server)
+    if (!origin) return callback(null, true);
+    
+    const envOrigins = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : [];
+    const isAllowed = allowedOrigins.includes(origin) || 
+                      envOrigins.includes(origin) ||
+                      origin.endsWith('.vercel.app') ||
+                      // Also handle vercel preview domains that might start with https://
+                      /^https:\/\/.*\.vercel\.app$/.test(origin);
+                      
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Not allowed by CORS: ${origin}`));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -84,7 +105,7 @@ app.get('/health', (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/out')));
   
-  app.get('*', (req, res) => {
+  app.get(/.*/, (req, res) => {
     // If not matching API route, serve static SPA files
     if (!req.url.startsWith('/api')) {
       res.sendFile(path.join(__dirname, '../frontend/out/index.html'));
