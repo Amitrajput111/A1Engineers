@@ -28,42 +28,49 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Study Vault', href: '/notes' },
+    { name: 'Tracks', href: '/#syllabus-section' },
+    { name: 'Progress', href: '/dsa' },
+    { name: 'Profile', href: '/profile' }
   ];
 
   const isActive = (path: string) => {
     if (path === '/') return pathname === '/';
+    if (path === '/#syllabus-section') return pathname === '/';
     return pathname.startsWith(path);
   };
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-border/80 bg-background/70 backdrop-blur-md">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Left - Logo */}
+    <nav className="sticky top-0 z-50 w-full h-[72px] border-b border-white/[0.06] bg-[#020817]/80 backdrop-blur-lg flex items-center">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          {/* Left - Logo Area */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-tr from-primary to-secondary font-black text-white text-lg">
+            <Link href="/" className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] font-black text-white text-lg shadow-[0_0_20px_rgba(59,130,246,0.3)]">
                 A1
               </span>
-              <span className="text-xl font-bold tracking-tight text-foreground">
-                A1 <span className="text-primary">Learner</span>
+              <span className="text-xl font-bold tracking-tight text-[#F8FAFC]">
+                A1 Learning
               </span>
             </Link>
           </div>
 
           {/* Center - Links (Desktop) */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-semibold transition-colors duration-200 ${
+                className={`relative text-sm font-medium transition-colors duration-200 pb-1 group ${
                   isActive(link.href)
-                    ? 'text-primary'
-                    : 'text-text-muted hover:text-foreground'
+                    ? 'text-[#60A5FA]'
+                    : 'text-[#94A3B8] hover:text-[#60A5FA]'
                 }`}
               >
-                {link.name}
+                <span>{link.name}</span>
+                <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#60A5FA] transform origin-left transition-transform duration-300 ${
+                  isActive(link.href) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`} />
               </Link>
             ))}
           </div>
@@ -73,13 +80,13 @@ export const Navbar: React.FC = () => {
             {isAuthenticated && user ? (
               <div className="flex items-center gap-4">
                 {/* Streak Counter */}
-                <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-warning/10 border border-warning/20 text-warning text-xs font-bold">
+                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-warning/10 border border-warning/20 text-warning text-xs font-bold font-mono">
                   <Flame className="h-4 w-4 fill-warning" />
                   <span>{user.streak} Days</span>
                 </div>
 
                 {/* XP Count */}
-                <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold">
+                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold font-mono">
                   <Award className="h-4 w-4" />
                   <span>{user.xp} XP</span>
                 </div>
@@ -87,7 +94,7 @@ export const Navbar: React.FC = () => {
                 {/* Admin dashboard quicklink */}
                 {user.role === 'admin' && (
                   <Link href="/admin">
-                    <Button variant="ghost" size="sm" className="gap-1 border border-danger/30 text-danger hover:bg-danger/10">
+                    <Button variant="ghost" size="sm" className="gap-1.5 border border-danger/30 text-danger hover:bg-danger/10">
                       <ShieldAlert className="h-4 w-4" />
                       <span>Admin</span>
                     </Button>
@@ -96,7 +103,7 @@ export const Navbar: React.FC = () => {
 
                 {/* Profile Avatar & dropdown click */}
                 <Link href="/profile">
-                  <div className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-card-bg/50 border border-transparent hover:border-border transition-all cursor-pointer">
+                  <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl hover:bg-[#1E293B]/50 border border-transparent hover:border-white/[0.08] transition-all cursor-pointer">
                     {user.avatar ? (
                       <img src={user.avatar} alt="avatar" className="h-6 w-6 rounded-full object-cover" />
                     ) : (
@@ -104,7 +111,7 @@ export const Navbar: React.FC = () => {
                         {user.name.charAt(0)}
                       </div>
                     )}
-                    <span className="text-xs font-semibold text-foreground max-w-[100px] truncate">
+                    <span className="text-xs font-semibold text-[#CBD5E1] max-w-[100px] truncate">
                       {user.name}
                     </span>
                   </div>
@@ -113,21 +120,21 @@ export const Navbar: React.FC = () => {
                 {/* Logout Button */}
                 <button
                   onClick={handleLogout}
-                  className="p-2 rounded-lg text-text-muted hover:text-danger hover:bg-danger/10 transition-colors cursor-pointer"
+                  className="p-2 rounded-xl text-text-muted hover:text-danger hover:bg-danger/10 transition-colors cursor-pointer"
                   title="Logout"
                 >
                   <LogOut className="h-4.5 w-4.5" />
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <Link href="/login">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="text-sm font-semibold text-[#CBD5E1] hover:text-[#60A5FA]">
                     Login
                   </Button>
                 </Link>
                 <Link href="/register">
-                  <Button variant="primary" size="sm">
+                  <Button size="sm" className="bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] text-white hover:brightness-110 rounded-xl transition-all shadow-[0_0_15px_rgba(59,130,246,0.2)] font-semibold border-0">
                     Get Started
                   </Button>
                 </Link>

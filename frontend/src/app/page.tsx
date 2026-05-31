@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { Button } from '../components/ui/Button';
 import { useAuthStore } from '../store/authStore';
 import { apiClient } from '../services/api';
@@ -17,7 +18,14 @@ import {
   CheckCircle,
   Clock,
   Award,
-  Shield
+  Shield,
+  Layers,
+  Sparkles,
+  CheckCircle2,
+  Lock,
+  GitBranch,
+  Activity,
+  Cpu
 } from 'lucide-react';
 
 interface RoadmapItem {
@@ -72,103 +80,184 @@ export default function PersonalLearningHub() {
     const cat = category.toLowerCase();
     if (cat.includes('dsa')) {
       return {
-        bg: 'from-blue-600/10 to-indigo-600/5 hover:border-blue-500/40 border-blue-500/10 shadow-blue-500/5',
-        text: 'text-blue-400',
-        pill: 'bg-blue-500/10 border-blue-500/20 text-blue-400',
-        bar: 'bg-blue-500',
-        button: 'hover:bg-blue-600 hover:text-white border-blue-500/30 text-blue-400 bg-transparent',
-        icon: <Target className="h-6 w-6 text-blue-400" />,
+        badgeColor: 'text-[#3B82F6] bg-[#3B82F6]/10 border-[#3B82F6]/20',
+        textColor: 'text-[#3B82F6]',
+        textHoverColor: 'group-hover:text-[#60A5FA]',
+        barColor: 'bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6]',
+        icon: <Target className="h-7 w-7 text-[#3B82F6]" />,
+        iconColor: '#3B82F6',
+        difficulty: 'Beginner to Hard',
+        hours: '20 Hours',
+        topics: '20 Topics',
+        buttonTheme: 'bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white shadow-[0_4px_20px_rgba(59,130,246,0.3)] hover:brightness-115',
         diagram: (
-          <svg className="w-full h-16 opacity-85" viewBox="0 0 200 60" fill="none">
-            {/* Contiguous memory grid */}
-            <rect x="10" y="15" width="30" height="30" rx="4" stroke="#1E293B" strokeWidth="1.5" fill="#0F172A" />
-            <rect x="45" y="15" width="30" height="30" rx="4" stroke="#3B82F6" strokeWidth="1.5" fill="rgba(59, 130, 246, 0.15)" />
-            <rect x="80" y="15" width="30" height="30" rx="4" stroke="#1E293B" strokeWidth="1.5" fill="#0F172A" />
-            <rect x="115" y="15" width="30" height="30" rx="4" stroke="#1E293B" strokeWidth="1.5" fill="#0F172A" />
-            {/* Arrow showing swap or offset */}
-            <path d="M25 48 L25 52 L130 52 L130 48" stroke="#60A5FA" strokeWidth="1.5" strokeDasharray="3 3" />
-            <text x="77" y="48" fill="#60A5FA" fontSize="8" fontFamily="monospace">O(1) offset</text>
-            {/* Data values inside */}
-            <text x="21" y="33" fill="#94A3B8" fontSize="10" fontWeight="bold">10</text>
-            <text x="56" y="33" fill="#60A5FA" fontSize="10" fontWeight="bold">20</text>
-            <text x="91" y="33" fill="#94A3B8" fontSize="10" fontWeight="bold">30</text>
-            <text x="126" y="33" fill="#94A3B8" fontSize="10" fontWeight="bold">40</text>
-          </svg>
+          <div className="w-full h-full relative flex items-center justify-center bg-black/40 rounded-xl overflow-hidden border border-white/[0.04] p-3 select-none">
+            {/* Animated Array memory diagram */}
+            <div className="flex gap-2 items-center justify-center w-full z-10">
+              {[12, 24, 48, 96].map((val, idx) => (
+                <motion.div
+                  key={idx}
+                  className={`h-11 w-11 rounded-lg border flex flex-col items-center justify-center ${
+                    idx === 2 
+                      ? 'border-[#3B82F6] bg-[#3B82F6]/10 shadow-[0_0_15px_rgba(59,130,246,0.15)]'
+                      : 'border-white/[0.08] bg-[#0F172A]'
+                  }`}
+                  animate={{
+                    borderColor: idx === 2 ? ['#3B82F6', '#8B5CF6', '#3B82F6'] : 'rgba(255, 255, 255, 0.08)'
+                  }}
+                  transition={{ repeat: Infinity, duration: 4, delay: idx * 0.5 }}
+                >
+                  <span className="text-[10px] font-mono text-[#94A3B8]">[{idx}]</span>
+                  <span className={`text-xs font-mono font-bold ${idx === 2 ? 'text-[#60A5FA]' : 'text-[#F8FAFC]'}`}>{val}</span>
+                </motion.div>
+              ))}
+            </div>
+            {/* Moving Pointer animation */}
+            <motion.div 
+              className="absolute bottom-2 left-6 flex flex-col items-center"
+              animate={{ x: [0, 48, 96, 0] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            >
+              <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-[#60A5FA]" />
+              <span className="text-[8px] font-mono font-bold text-[#60A5FA] mt-0.5">ptr</span>
+            </motion.div>
+          </div>
         )
       };
     }
     if (cat.includes('web') || cat.includes('dev')) {
       return {
-        bg: 'from-purple-600/10 to-pink-600/5 hover:border-purple-500/40 border-purple-500/10 shadow-purple-500/5',
-        text: 'text-purple-400',
-        pill: 'bg-purple-500/10 border-purple-500/20 text-purple-400',
-        bar: 'bg-purple-500',
-        button: 'hover:bg-purple-600 hover:text-white border-purple-500/30 text-purple-400 bg-transparent',
-        icon: <Layout className="h-6 w-6 text-purple-400" />,
+        badgeColor: 'text-[#8B5CF6] bg-[#8B5CF6]/10 border-[#8B5CF6]/20',
+        textColor: 'text-[#8B5CF6]',
+        textHoverColor: 'group-hover:text-[#A78BFA]',
+        barColor: 'bg-gradient-to-r from-[#8B5CF6] to-[#EF4444]',
+        icon: <Layout className="h-7 w-7 text-[#8B5CF6]" />,
+        iconColor: '#8B5CF6',
+        difficulty: 'Medium',
+        hours: '15 Hours',
+        topics: '18 Topics',
+        buttonTheme: 'bg-gradient-to-r from-[#8B5CF6] to-[#EF4444] text-white shadow-[0_4px_20px_rgba(139,92,246,0.3)] hover:brightness-115',
         diagram: (
-          <svg className="w-full h-16 opacity-85" viewBox="0 0 200 60" fill="none">
-            {/* Context/DOM distribution tree */}
-            <circle cx="100" cy="12" r="8" stroke="#8B5CF6" strokeWidth="1.5" fill="rgba(139, 92, 246, 0.15)" />
-            <line x1="100" y1="20" x2="60" y2="35" stroke="#1E293B" strokeWidth="1.5" />
-            <line x1="100" y1="20" x2="140" y2="35" stroke="#1E293B" strokeWidth="1.5" />
-            <circle cx="60" cy="40" r="8" stroke="#1E293B" strokeWidth="1.5" fill="#0F172A" />
-            <circle cx="140" cy="40" r="8" stroke="#A78BFA" strokeWidth="1.5" fill="rgba(167, 139, 250, 0.15)" />
-            {/* Direct state bypass flow */}
-            <path d="M108 12 C 150 15, 155 30, 148 38" stroke="#A78BFA" strokeWidth="1.5" />
-            <text x="125" y="24" fill="#A78BFA" fontSize="8" fontFamily="monospace">Direct State</text>
-          </svg>
+          <div className="w-full h-full relative flex items-center justify-center bg-black/40 rounded-xl overflow-hidden border border-white/[0.04] p-3 select-none">
+            {/* Frontend -> Backend -> Database schema */}
+            <div className="flex justify-between items-center w-full px-2 z-10 text-[9px] font-mono">
+              <div className="flex flex-col items-center gap-1">
+                <div className="h-10 w-12 rounded bg-[#0F172A] border border-white/[0.08] flex items-center justify-center text-[#F8FAFC] font-bold shadow-[0_0_10px_rgba(0,0,0,0.5)]">UI</div>
+                <span className="text-[#94A3B8] scale-90">Client</span>
+              </div>
+              
+              <div className="flex-1 h-[2px] bg-white/[0.06] mx-1 relative overflow-hidden">
+                <motion.div 
+                  className="absolute h-full w-4 bg-gradient-to-r from-transparent via-[#A78BFA] to-transparent"
+                  animate={{ left: ['-20%', '120%'] }}
+                  transition={{ repeat: Infinity, duration: 2.5, ease: "linear" }}
+                />
+              </div>
+
+              <div className="flex flex-col items-center gap-1">
+                <div className="h-10 w-12 rounded bg-[#0F172A] border border-[#8B5CF6]/40 flex items-center justify-center text-[#A78BFA] font-bold shadow-[0_0_15px_rgba(139,92,246,0.1)]">API</div>
+                <span className="text-[#94A3B8] scale-90">Server</span>
+              </div>
+
+              <div className="flex-1 h-[2px] bg-white/[0.06] mx-1 relative overflow-hidden">
+                <motion.div 
+                  className="absolute h-full w-4 bg-gradient-to-r from-transparent via-[#A78BFA] to-transparent"
+                  animate={{ left: ['-20%', '120%'] }}
+                  transition={{ repeat: Infinity, duration: 2.5, ease: "linear", delay: 1.2 }}
+                />
+              </div>
+
+              <div className="flex flex-col items-center gap-1">
+                <div className="h-10 w-12 rounded bg-[#0F172A] border border-white/[0.08] flex items-center justify-center text-[#F8FAFC] font-bold shadow-[0_0_10px_rgba(0,0,0,0.5)]">DB</div>
+                <span className="text-[#94A3B8] scale-90">SQL/No</span>
+              </div>
+            </div>
+          </div>
         )
       };
     }
     if (cat.includes('cyber') || cat.includes('security')) {
       return {
-        bg: 'from-rose-600/10 to-red-600/5 hover:border-rose-500/40 border-rose-500/10 shadow-rose-500/5',
-        text: 'text-rose-400',
-        pill: 'bg-rose-500/10 border-rose-500/20 text-rose-400',
-        bar: 'bg-rose-500',
-        button: 'hover:bg-rose-600 hover:text-white border-rose-500/30 text-rose-400 bg-transparent',
-        icon: <Shield className="h-6 w-6 text-rose-400" />,
+        badgeColor: 'text-[#EF4444] bg-[#EF4444]/10 border-[#EF4444]/20',
+        textColor: 'text-[#EF4444]',
+        textHoverColor: 'group-hover:text-[#F87171]',
+        barColor: 'bg-gradient-to-r from-[#EF4444] to-[#F59E0B]',
+        icon: <Shield className="h-7 w-7 text-[#EF4444]" />,
+        iconColor: '#EF4444',
+        difficulty: 'Medium',
+        hours: '10 Hours',
+        topics: '12 Topics',
+        buttonTheme: 'bg-gradient-to-r from-[#EF4444] to-[#F59E0B] text-white shadow-[0_4px_20px_rgba(239,68,68,0.3)] hover:brightness-115',
         diagram: (
-          <svg className="w-full h-16 opacity-85" viewBox="0 0 200 60" fill="none">
-            <rect x="85" y="22" width="30" height="22" rx="3" stroke="#F43F5E" strokeWidth="1.5" fill="rgba(244, 63, 94, 0.15)" />
-            <path d="M92 22 L92 15 C 92 9, 108 9, 108 15 L 108 22" stroke="#F43F5E" strokeWidth="1.5" fill="none" />
-            <circle cx="100" cy="30" r="2.5" fill="#F43F5E" />
-            <line x1="100" y1="33" x2="100" y2="39" stroke="#F43F5E" strokeWidth="1.5" />
-            <text x="125" y="34" fill="#F43F5E" fontSize="8" fontFamily="monospace">AES 256</text>
-          </svg>
+          <div className="w-full h-full relative flex items-center justify-center bg-black/40 rounded-xl overflow-hidden border border-white/[0.04] p-3 select-none">
+            {/* Animated Shield / Radar lock */}
+            <div className="relative flex items-center justify-center h-14 w-14">
+              <motion.div 
+                className="absolute inset-0 rounded-full border border-[#EF4444]/30"
+                animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.8, 0.3] }}
+                transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+              />
+              <motion.div 
+                className="absolute inset-2 rounded-full border border-dashed border-[#EF4444]/50"
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+              />
+              <Shield className="h-7 w-7 text-[#EF4444] drop-shadow-[0_0_8px_rgba(239,68,68,0.4)] z-10" />
+            </div>
+            <span className="absolute bottom-2 right-4 text-[7px] font-mono text-[#EF4444]/70">AES_256 SECURED</span>
+          </div>
         )
       };
     }
-    // AI/ML
+    // AI/ML Default
     return {
-      bg: 'from-emerald-600/10 to-teal-600/5 hover:border-emerald-500/40 border-emerald-500/10 shadow-emerald-500/5',
-      text: 'text-emerald-400',
-      pill: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
-      bar: 'bg-emerald-500',
-      button: 'hover:bg-emerald-600 hover:text-white border-emerald-500/30 text-emerald-400 bg-transparent',
-      icon: <Bot className="h-6 w-6 text-emerald-400" />,
+      badgeColor: 'text-[#10B981] bg-[#10B981]/10 border-[#10B981]/20',
+      textColor: 'text-[#10B981]',
+      textHoverColor: 'group-hover:text-[#34D399]',
+      barColor: 'bg-gradient-to-r from-[#10B981] to-[#3B82F6]',
+      icon: <Bot className="h-7 w-7 text-[#10B981]" />,
+      iconColor: '#10B981',
+      difficulty: 'Easy',
+      hours: '8 Hours',
+      topics: '10 Topics',
+      buttonTheme: 'bg-gradient-to-r from-[#10B981] to-[#3B82F6] text-white shadow-[0_4px_20px_rgba(16,185,129,0.3)] hover:brightness-115',
       diagram: (
-        <svg className="w-full h-16 opacity-85" viewBox="0 0 200 60" fill="none">
-          {/* Vector strides / matrix grid */}
-          <rect x="40" y="5" width="24" height="24" rx="2" stroke="#10B981" strokeWidth="1.5" fill="rgba(16, 185, 129, 0.15)" />
-          <rect x="70" y="5" width="24" height="24" rx="2" stroke="#10B981" strokeWidth="1.5" fill="rgba(16, 185, 129, 0.15)" />
-          <rect x="100" y="5" width="24" height="24" rx="2" stroke="#1E293B" strokeWidth="1.5" fill="#0F172A" />
-          
-          <rect x="40" y="32" width="24" height="24" rx="2" stroke="#1E293B" strokeWidth="1.5" fill="#0F172A" />
-          <rect x="70" y="32" width="24" height="24" rx="2" stroke="#10B981" strokeWidth="1.5" fill="rgba(16, 185, 129, 0.15)" />
-          <rect x="100" y="32" width="24" height="24" rx="2" stroke="#10B981" strokeWidth="1.5" fill="rgba(16, 185, 129, 0.15)" />
-          <text x="135" y="33" fill="#34D399" fontSize="8" fontFamily="monospace">Slicing strides</text>
-        </svg>
+        <div className="w-full h-full relative flex items-center justify-center bg-black/40 rounded-xl overflow-hidden border border-white/[0.04] p-3 select-none">
+          {/* Animated neural net nodes */}
+          <div className="relative flex justify-between w-full max-w-[140px] h-12 items-center">
+            {/* Input layer (2 nodes) */}
+            <div className="flex flex-col justify-between h-full py-1">
+              <div className="h-2 w-2 rounded-full bg-[#10B981]" />
+              <div className="h-2 w-2 rounded-full bg-[#10B981]" />
+            </div>
+
+            {/* Hidden layer (3 nodes) */}
+            <div className="flex flex-col justify-between h-full">
+              <motion.div animate={{ backgroundColor: ['#0F172A', '#34D399', '#0F172A'] }} transition={{ repeat: Infinity, duration: 2, delay: 0 }} className="h-2.5 w-2.5 rounded-full border border-[#10B981]/60" />
+              <motion.div animate={{ backgroundColor: ['#0F172A', '#34D399', '#0F172A'] }} transition={{ repeat: Infinity, duration: 2, delay: 0.6 }} className="h-2.5 w-2.5 rounded-full border border-[#10B981]/60" />
+              <motion.div animate={{ backgroundColor: ['#0F172A', '#34D399', '#0F172A'] }} transition={{ repeat: Infinity, duration: 2, delay: 1.2 }} className="h-2.5 w-2.5 rounded-full border border-[#10B981]/60" />
+            </div>
+
+            {/* Output layer (1 node) */}
+            <div className="flex items-center justify-center h-full">
+              <div className="h-3.5 w-3.5 rounded-full bg-gradient-to-br from-[#10B981] to-[#3B82F6] shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+            </div>
+
+            {/* Matrix background math decoration */}
+            <span className="absolute left-[35%] top-[12%] text-[6px] font-mono text-[#94A3B8]/30">w1=0.74</span>
+            <span className="absolute left-[35%] bottom-[12%] text-[6px] font-mono text-[#94A3B8]/30">w2=0.29</span>
+          </div>
+        </div>
       )
     };
   };
 
   if (isLoading || fetching) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-background">
+      <div className="flex-1 flex items-center justify-center bg-[#020817]">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-          <p className="text-sm font-semibold text-text-muted select-none">Initializing learning workspace...</p>
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#3B82F6] border-t-transparent" />
+          <p className="text-sm font-semibold text-[#94A3B8] select-none">Initializing learning workspace...</p>
         </div>
       </div>
     );
@@ -251,29 +340,52 @@ export default function PersonalLearningHub() {
   const activePathsList = roadmaps.length > 0 ? roadmaps : defaultPaths;
 
   return (
-    <div className="flex-1 flex flex-col bg-background text-foreground relative overflow-hidden">
+    <div className="flex-1 flex flex-col bg-[#020817] text-[#F8FAFC] relative overflow-hidden font-sans select-none">
       {/* Background glowing decorations */}
-      <div className="absolute top-0 left-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px]" />
-      <div className="absolute top-1/3 right-1/4 -z-10 h-[600px] w-[600px] rounded-full bg-secondary/5 blur-[150px]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-[600px] w-full max-w-[1100px] rounded-full bg-radial-gradient from-[#3B82F6]/10 to-transparent blur-[120px] pointer-events-none" 
+        style={{ backgroundImage: 'radial-gradient(circle at center, rgba(59,130,246,0.15), transparent 70%)' }} />
+      <div className="absolute top-1/3 right-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-[#8B5CF6]/5 blur-[150px] pointer-events-none" />
 
       {/* 1. Hero / Header Introduction */}
-      <section className="pt-20 pb-12 max-w-5xl mx-auto px-6 text-center space-y-6">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold select-none">
-          <Compass className="h-3.5 w-3.5 animate-pulse" />
+      <section className="min-h-[80vh] flex flex-col items-center justify-center text-center max-w-[1100px] mx-auto px-6 relative">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-[#CBD5E1] text-xs font-medium select-none shadow-[0_4px_12px_rgba(0,0,0,0.1)] mb-6"
+        >
+          <Sparkles className="h-3.5 w-3.5 text-[#3B82F6]" />
           <span>India's Best Personal Curriculum Workspace</span>
-        </div>
-        <h1 className="text-4xl md:text-6xl font-black tracking-tight text-white leading-tight">
+        </motion.div>
+        
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-5xl md:text-7xl font-extrabold tracking-[-0.04em] text-[#F8FAFC] leading-[1.1] max-w-[900px] mb-6"
+        >
           Master Engineering Subjects <br />
-          <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">With Structured Notes & Diagrams</span>
-        </h1>
-        <p className="text-sm md:text-base text-text-muted max-w-2xl mx-auto leading-relaxed">
-          Skip social media noise. Focus strictly on learning key subjects: DSA, Development, and AI/ML. Read detailed notes, trace code blueprints with custom vector diagrams, and verify with quizzes.
-        </p>
+          <span className="bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">Structured Notes & Diagrams</span>
+        </motion.h1>
 
-        <div className="flex justify-center gap-4 pt-2">
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-base md:text-[18px] text-[#94A3B8] max-w-[700px] mx-auto leading-[1.8] mb-10"
+        >
+          Skip social media noise. Focus strictly on learning key subjects: DSA, Development, AI/ML, and Security. Read detailed notes, trace code blueprints with custom vector diagrams, and verify with dynamic quizzes.
+        </motion.p>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-col sm:flex-row justify-center gap-6 w-full sm:w-auto"
+        >
           <Button 
             size="lg" 
-            className="gap-2 cursor-pointer font-bold bg-gradient-to-r from-primary to-secondary text-white border-0 hover:opacity-90"
+            className="h-14 px-8 gap-2 cursor-pointer font-semibold text-white bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] rounded-[14px] border-0 hover:brightness-110 shadow-[0_4px_25px_rgba(59,130,246,0.3)] transition-all"
             onClick={() => {
               document.getElementById('syllabus-section')?.scrollIntoView({ behavior: 'smooth' });
             }}
@@ -282,143 +394,184 @@ export default function PersonalLearningHub() {
             <ArrowRight className="h-4.5 w-4.5" />
           </Button>
           <Link href="/notes">
-            <Button variant="outline" size="lg" className="cursor-pointer font-bold border-border/80 text-foreground hover:bg-card-bg/50">
+            <Button variant="outline" size="lg" className="h-14 px-8 cursor-pointer font-semibold border-white/15 text-[#F8FAFC] hover:bg-white/[0.03] bg-transparent rounded-[14px] transition-all">
               Study Note Vault
             </Button>
           </Link>
-        </div>
+        </motion.div>
       </section>
 
       {/* 2. Structured Learning Paths (Exactly 4 Cards) */}
-      <section id="syllabus-section" className="py-12 max-w-7xl mx-auto px-6 w-full scroll-mt-20">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl font-black text-white">Syllabus Pathways</h2>
-          <p className="text-xs text-text-muted mt-1.5">Follow our curated courses to unlock concepts and earn XP.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {activePathsList.map((rm) => {
-            const theme = getTrackTheme(rm.category);
-            const activeCourse = rm.courses[0];
-            const modulesCount = activeCourse ? activeCourse.modules.length : 0;
-            
-            // Calculate progress percent from completed lessons (or defaults)
-            const completed = user?.completedLessons || [];
-            const courseLessons = activeCourse ? activeCourse.modules.reduce((acc, curr) => acc + (curr.lessons?.length || 0), 0) : 0;
-            const courseCompleted = activeCourse ? activeCourse.modules.reduce((acc, mod) => {
-              const comp = mod.lessons ? mod.lessons.filter(l => completed.includes(`${rm.id}/${l.id}`)).length : 0;
-              return acc + comp;
-            }, 0) : 0;
-            const percent = courseLessons > 0 ? Math.round((courseCompleted / courseLessons) * 100) : 0;
-
-            // Completion Time Bar calculations
-            const totalHours = activeCourse ? parseInt(activeCourse.duration) || 10 : 10;
-            const completedHours = Math.round((percent / 100) * totalHours * 10) / 10;
-            const remainingHours = Math.max(0, Math.round((totalHours - completedHours) * 10) / 10);
-
-            return (
-              <div 
-                key={rm.id} 
-                className={`rounded-xl border bg-gradient-to-br ${theme.bg} p-6 flex flex-col justify-between transition-all duration-300 hover:scale-[1.02] shadow-xl`}
-              >
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className={`text-[9px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full border ${theme.pill} font-mono`}>
-                      {rm.category}
-                    </span>
-                    {theme.icon}
-                  </div>
-
-                  <div>
-                    <h3 className="text-xl font-extrabold text-white">{rm.title}</h3>
-                    <p className="text-xs text-text-muted mt-2 leading-relaxed font-normal line-clamp-3">
-                      {rm.description}
-                    </p>
-                  </div>
-
-                  {/* SVG Diagram Preview inside Card */}
-                  <div className="border border-border/40 rounded-lg p-2 bg-black/20 flex items-center justify-center">
-                    {theme.diagram}
-                  </div>
-
-                  {/* Curriculum Details */}
-                  <div className="space-y-3 pt-2">
-                    <div className="flex justify-between items-center text-[10px] font-bold text-text-muted font-mono">
-                      <span>{modulesCount} Modules</span>
-                      {activeCourse && <span>{activeCourse.duration}</span>}
-                    </div>
-                    
-                    {/* Lesson Completion Progress tracker bar */}
-                    <div className="space-y-1">
-                      <div className="flex justify-between items-center text-[9px] font-bold font-mono">
-                        <span className="text-text-muted">Lessons Completed</span>
-                        <span className={theme.text}>{percent}%</span>
-                      </div>
-                      <div className="h-1 w-full bg-border/40 rounded-full overflow-hidden">
-                        <div 
-                          className={`h-full ${theme.bar} transition-all duration-500`}
-                          style={{ width: `${percent}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Completion Time Bar */}
-                    <div className="space-y-1 pt-1 border-t border-border/20">
-                      <div className="flex justify-between items-center text-[9px] font-bold font-mono">
-                        <span className="text-text-muted">Completion Time Bar</span>
-                        <span className={theme.text}>{completedHours}h / {totalHours}h</span>
-                      </div>
-                      <div className="h-1 w-full bg-border/40 rounded-full overflow-hidden">
-                        <div 
-                          className={`h-full ${theme.bar} opacity-85 transition-all duration-500`}
-                          style={{ width: `${percent}%` }}
-                        />
-                      </div>
-                      <div className="flex justify-between items-center text-[8px] text-text-muted font-bold font-mono">
-                        <span>Time Spent</span>
-                        <span>{remainingHours === 0 ? 'Completed' : `${remainingHours}h remaining`}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-6 border-t border-border/30 mt-6">
-                  <Button 
-                    variant="outline" 
-                    className={`w-full justify-center font-bold ${theme.button} border transition-colors`}
-                    onClick={() => router.push(rm.id === 'dsa' ? '/dsa' : `/roadmaps/${rm.id}`)}
-                  >
-                    <span>Launch Path</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 3. Simplified Workspace Banner */}
-      <section className="py-16 max-w-4xl mx-auto px-6 text-center border-t border-border/40 mt-12 space-y-6">
-        <h2 className="text-2xl font-black text-white">Looking for the Personal Notes Workspace?</h2>
-        <p className="text-xs text-text-muted max-w-md mx-auto leading-relaxed">
-          Create, edit, and auto-save custom study templates. Split-screen live preview, markdown compiling, and notes category sorting is fully functional in the vault.
-        </p>
-        <Link href="/notes">
-          <Button className="px-6 cursor-pointer font-bold bg-primary text-white border-0 hover:bg-primary-hover">
-            Open Study Vault
-          </Button>
-        </Link>
-      </section>
-
-      {/* 4. Simple Footer */}
-      <footer className="py-8 border-t border-border/40 bg-black/10 mt-auto">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded bg-primary font-black text-white text-sm select-none">A1</span>
-            <span className="text-sm font-bold text-white">A1 Learner</span>
+      <section id="syllabus-section" className="py-[120px] bg-[#071120] w-full border-y border-white/[0.04] scroll-mt-10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-[36px] font-bold tracking-tight text-[#F8FAFC]">Syllabus Pathways</h2>
+            <p className="text-base md:text-[18px] text-[#94A3B8] mt-3 max-w-[600px] mx-auto">
+              Clear learning paths for placement preparation and career growth.
+            </p>
           </div>
-          <p className="text-[10px] text-text-muted">© {new Date().getFullYear()} A1 Learner. Structured Personal Curriculum for Amit Rajput.</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+            {activePathsList.map((rm, idx) => {
+              const theme = getTrackTheme(rm.category);
+              const activeCourse = rm.courses[0];
+              
+              // Calculate progress percent from completed lessons (or defaults)
+              const completed = user?.completedLessons || [];
+              const courseLessons = activeCourse ? activeCourse.modules.reduce((acc, curr) => acc + (curr.lessons?.length || 0), 0) : 0;
+              const courseCompleted = activeCourse ? activeCourse.modules.reduce((acc, mod) => {
+                const comp = mod.lessons ? mod.lessons.filter(l => completed.includes(`${rm.id}/${l.id}`)).length : 0;
+                return acc + comp;
+              }, 0) : 0;
+              const percent = courseLessons > 0 ? Math.round((courseCompleted / courseLessons) * 100) : 0;
+
+              return (
+                <motion.div 
+                  key={rm.id} 
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="w-full max-w-[380px] h-[540px] rounded-[24px] border border-white/[0.08] bg-gradient-to-b from-[#1E293B]/90 to-[#111827]/95 p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] shadow-[0_25px_60px_rgba(0,0,0,0.25)] hover:border-white/[0.15] group"
+                >
+                  <div className="space-y-5 flex-1 flex flex-col">
+                    {/* Top Area: Badge & Icon */}
+                    <div className="flex justify-between items-center">
+                      <span className={`text-[10px] font-bold tracking-wider uppercase px-3 py-1 rounded-full border ${theme.badgeColor} font-mono`}>
+                        {rm.category.includes('DSA') ? 'DSA' : rm.category.includes('Full') ? 'Full Stack' : rm.category.includes('AI') ? 'AI' : 'Cybersecurity'}
+                      </span>
+                      <div className="p-1.5 rounded-xl bg-white/[0.03] border border-white/[0.05] shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
+                        {theme.icon}
+                      </div>
+                    </div>
+
+                    {/* Middle Area: Title & Description */}
+                    <div>
+                      <h3 className="text-xl font-bold text-[#F8FAFC] tracking-tight">{rm.title}</h3>
+                      <p className="text-[13px] text-[#CBD5E1] mt-2 leading-[1.6] line-clamp-2 font-normal">
+                        {rm.description}
+                      </p>
+                    </div>
+
+                    {/* Animated Diagram Area */}
+                    <div className="flex-1 min-h-[120px] max-h-[140px] w-full rounded-xl overflow-hidden">
+                      {theme.diagram}
+                    </div>
+
+                    {/* Meta stats capsules */}
+                    <div className="grid grid-cols-2 gap-2 text-[11px] font-medium text-[#CBD5E1] font-mono">
+                      <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                        <BookOpen className="h-3.5 w-3.5 text-[#94A3B8]" />
+                        <span>{theme.topics}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                        <Clock className="h-3.5 w-3.5 text-[#94A3B8]" />
+                        <span>{theme.hours}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/[0.04] col-span-2">
+                        <Award className="h-3.5 w-3.5 text-[#94A3B8]" />
+                        <span>Certificate & Placement Ready</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Area: Progress & Action Button */}
+                  <div className="pt-4 border-t border-white/[0.06] mt-5 space-y-4">
+                    {/* Progress tracker */}
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between items-center text-[10px] font-bold font-mono text-[#94A3B8]">
+                        <span>Progress Tracker</span>
+                        <span className={theme.textColor}>{percent}%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+                        <motion.div 
+                          className={`h-full ${theme.barColor} rounded-full`}
+                          initial={{ width: 0 }}
+                          animate={{ width: `${percent}%` }}
+                          transition={{ duration: 0.8, ease: "easeOut" }}
+                        />
+                      </div>
+                    </div>
+
+                    <Button 
+                      className={`w-full h-11 justify-center gap-2 font-semibold rounded-xl text-sm transition-all ${theme.buttonTheme}`}
+                      onClick={() => router.push(rm.id === 'dsa' ? '/dsa' : `/roadmaps/${rm.id}`)}
+                    >
+                      <span>Launch Path</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Study Vault Banner */}
+      <section className="py-[120px] max-w-[1100px] mx-auto px-6 text-center space-y-8">
+        <div className="p-10 rounded-[24px] border border-white/[0.06] bg-[#0F172A]/40 backdrop-blur-md relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+          <div className="absolute top-0 right-0 -z-10 h-64 w-64 rounded-full bg-[#3B82F6]/5 blur-[70px] pointer-events-none" />
+          <div className="max-w-[700px] mx-auto space-y-6">
+            <h2 className="text-3xl md:text-[36px] font-bold tracking-tight text-[#F8FAFC]">Looking for the Personal Notes Workspace?</h2>
+            <p className="text-base text-[#94A3B8] leading-[1.8] max-w-xl mx-auto">
+              Create, edit, and auto-save custom study templates. Split-screen live preview, markdown compiling, and notes category sorting is fully functional in the vault.
+            </p>
+            <Link href="/notes">
+              <Button className="h-12 px-8 cursor-pointer font-semibold bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] text-white rounded-xl border-0 hover:brightness-110 shadow-[0_4px_20px_rgba(59,130,246,0.25)] transition-all">
+                Open Study Vault
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Redesigned Footer */}
+      <footer className="py-20 border-t border-white/[0.06] bg-[#020617] relative">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            {/* Tagline & Logo */}
+            <div className="space-y-4 md:col-span-2">
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] font-black text-white text-lg">
+                  A1
+                </span>
+                <span className="text-xl font-bold tracking-tight text-[#F8FAFC]">A1 Learning</span>
+              </div>
+              <p className="text-sm text-[#94A3B8] max-w-sm leading-[1.7]">
+                A premium, modern curriculum framework built to support engineering placement preparation, interactive data visualization, and AI tutors.
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div className="space-y-4">
+              <h4 className="text-sm font-bold text-[#F8FAFC] uppercase tracking-wider">Quick Links</h4>
+              <ul className="space-y-2 text-sm text-[#94A3B8]">
+                <li><Link href="/" className="hover:text-[#60A5FA] transition-colors">Home</Link></li>
+                <li><Link href="/notes" className="hover:text-[#60A5FA] transition-colors">Study Vault</Link></li>
+                <li><Link href="/dsa" className="hover:text-[#60A5FA] transition-colors">DSA Roadmap</Link></li>
+                <li><Link href="/profile" className="hover:text-[#60A5FA] transition-colors">Profile Details</Link></li>
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div className="space-y-4">
+              <h4 className="text-sm font-bold text-[#F8FAFC] uppercase tracking-wider">Resources</h4>
+              <ul className="space-y-2 text-sm text-[#94A3B8]">
+                <li><span className="cursor-not-allowed hover:text-white transition-colors">Linear Systems</span></li>
+                <li><span className="cursor-not-allowed hover:text-white transition-colors">Stripe API References</span></li>
+                <li><span className="cursor-not-allowed hover:text-white transition-colors">Vercel Serverless</span></li>
+                <li><span className="cursor-not-allowed hover:text-white transition-colors">Notion Workspaces</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-white/[0.04] pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#94A3B8]">
+            <p>© {new Date().getFullYear()} A1 Learning. All rights reserved. Created for Amit Rajput.</p>
+            <div className="flex gap-6">
+              <span className="cursor-not-allowed hover:text-white transition-colors">Privacy Policy</span>
+              <span className="cursor-not-allowed hover:text-white transition-colors">Terms of Service</span>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
