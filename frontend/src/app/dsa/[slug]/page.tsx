@@ -715,8 +715,8 @@ export default function DsaTopicPage({ params }: PageProps) {
 
                     {/* SECTION 1: WHAT IS AN ARRAY? */}
                     <div className="space-y-8">
-                      <Card className="bg-gradient-to-br from-[#1E293B] to-[#111827] border border-[#334155] rounded-[20px] shadow-2xl relative overflow-hidden">
-                        <div className="absolute top-0 right-0 -z-10 h-32 w-32 rounded-full bg-primary/5 blur-2xl" />
+                      <Card className="bg-gradient-to-br from-[#0F172A] to-[#030712] border border-[#3B82F6]/30 rounded-[20px] shadow-[0_0_30px_rgba(59,130,246,0.12)] relative overflow-hidden hover:border-[#3B82F6]/50 transition-all duration-300">
+                        <div className="absolute top-0 right-0 -z-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl" />
                         <CardBody className="p-6">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                             {/* Left Side: Definition */}
@@ -738,7 +738,7 @@ export default function DsaTopicPage({ params }: PageProps) {
                             </div>
 
                             {/* Right Side: Visual Diagram with Floating Animation */}
-                            <div className="flex flex-col items-center justify-center p-6 rounded-[20px] bg-black/30 border border-[#334155]/60 min-h-[140px]">
+                            <div className="flex flex-col items-center justify-center p-6 rounded-[20px] bg-black/40 border border-[#3B82F6]/20 min-h-[140px] shadow-inner">
                               <motion.div 
                                 className="space-y-3 w-full flex flex-col items-center"
                                 animate={{ y: [0, -6, 0] }}
@@ -769,13 +769,13 @@ export default function DsaTopicPage({ params }: PageProps) {
                         <p className="text-xs text-text-muted font-normal">A side-by-side logical comparison of managing variables manually vs. grouping them inside an Array.</p>
                       </div>
                       
-                      <Card className="border border-border-color bg-card-bg rounded-[20px] overflow-hidden">
+                      <Card className="border border-[#3B82F6]/20 bg-gradient-to-br from-[#0F172A] to-[#030712] rounded-[20px] overflow-hidden shadow-[0_0_30px_rgba(59,130,246,0.08)] hover:border-[#3B82F6]/40 transition-all duration-300">
                         <CardBody className="p-6">
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             
                             {/* Left Side: Without Array (Red Theme) */}
                             <motion.div 
-                              className="p-5 rounded-2xl border border-[#EF4444]/20 bg-[#EF4444]/5 flex flex-col justify-between min-h-[180px] hover:border-[#EF4444]/40 transition-all duration-300"
+                              className="p-5 rounded-2xl border border-[#EF4444]/30 bg-[#EF4444]/10 flex flex-col justify-between min-h-[180px] hover:border-[#EF4444]/50 hover:shadow-[0_0_15px_rgba(239,68,68,0.05)] transition-all duration-300"
                               whileHover={{ scale: 1.01 }}
                             >
                               <div className="space-y-3">
@@ -799,7 +799,7 @@ student5 = 85`}
 
                             {/* Right Side: Using Array (Green Theme) */}
                             <motion.div 
-                              className="p-5 rounded-2xl border border-[#22C55E]/20 bg-[#22C55E]/5 flex flex-col justify-between min-h-[180px] hover:border-[#22C55E]/40 transition-all duration-300"
+                              className="p-5 rounded-2xl border border-[#22C55E]/30 bg-[#22C55E]/10 flex flex-col justify-between min-h-[180px] hover:border-[#22C55E]/50 hover:shadow-[0_0_15px_rgba(34,197,94,0.08)] transition-all duration-300"
                               whileHover={{ scale: 1.01 }}
                             >
                               <div className="space-y-3">
@@ -829,8 +829,8 @@ student5 = 85`}
                         <p className="text-xs text-text-muted font-normal">Explore syntax configurations and element access examples across multiple programming environments.</p>
                       </div>
 
-                      <Card className="bg-[#0F172A] border border-[#334155] rounded-[20px] overflow-hidden shadow-2xl">
-                        <div className="bg-[#030712] px-5 py-3 border-b border-[#334155]/60 flex items-center justify-between gap-4 flex-wrap select-none">
+                      <Card className="bg-gradient-to-br from-[#0F172A] to-[#030712] border border-[#3B82F6]/20 rounded-[20px] overflow-hidden shadow-[0_0_30px_rgba(59,130,246,0.08)] hover:border-[#3B82F6]/40 transition-all duration-300">
+                        <div className="bg-[#030712] px-5 py-3 border-b border-[#3B82F6]/25 flex items-center justify-between gap-4 flex-wrap select-none">
                           {/* VS Code title dots */}
                           <div className="flex items-center gap-2">
                             <span className="h-3 w-3 rounded-full bg-[#EF4444]/80" />
@@ -840,7 +840,7 @@ student5 = 85`}
                           </div>
 
                           {/* Language Switcher Tabs */}
-                          <div className="flex rounded border border-[#334155]/80 overflow-hidden bg-black/30">
+                          <div className="flex rounded border border-[#3B82F6]/30 overflow-hidden bg-black/30">
                             {[
                               { id: 'cpp', label: 'C++' },
                               { id: 'java', label: 'Java' },
@@ -978,7 +978,7 @@ student5 = 85`}
                         ].map((item, idx) => (
                           <motion.div
                             key={idx}
-                            className="p-6 rounded-[20px] border border-border-color bg-[#111827] flex flex-col gap-3 hover:border-primary/40 hover:scale-[1.01] transition-all duration-300 shadow-lg"
+                            className="p-6 rounded-[20px] border border-[#3B82F6]/20 bg-gradient-to-br from-[#0F172A] to-[#090D16] flex flex-col gap-3 hover:border-[#3B82F6]/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.12)] hover:scale-[1.01] transition-all duration-300"
                           >
                             <div className="flex items-center gap-2.5">
                               <div className="h-8 w-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
@@ -1008,7 +1008,7 @@ student5 = 85`}
                         ].map((item, idx) => (
                           <motion.div
                             key={idx}
-                            className="p-5 rounded-[20px] border border-border-color bg-[#111827] flex flex-col gap-2.5 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300"
+                            className="p-5 rounded-[20px] border border-[#3B82F6]/20 bg-gradient-to-br from-[#0F172A] to-[#090D16] flex flex-col gap-2.5 hover:-translate-y-1.5 hover:border-[#3B82F6]/40 hover:shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5),0_0_25px_rgba(59,130,246,0.1)] transition-all duration-300"
                           >
                             <div className="h-8 w-8 rounded-lg bg-[#22C55E]/10 border border-[#22C55E]/20 flex items-center justify-center text-[#22C55E]">
                               {item.icon}
@@ -1051,7 +1051,7 @@ student5 = 85`}
                     </div>
 
                     {/* Array blocks representation (Rounded, Gradient, Hover effects) */}
-                    <Card className="border border-border-color bg-card-bg rounded-[20px]">
+                    <Card className="border border-[#8B5CF6]/30 bg-gradient-to-br from-[#1E1B4B]/20 to-[#0F172A] rounded-[20px] shadow-[0_0_30px_rgba(139,92,246,0.12)] hover:border-[#8B5CF6]/50 transition-all duration-300">
                       <CardBody className="p-6 flex flex-col items-center justify-center gap-6 select-none relative">
                         <div className="flex flex-wrap items-center justify-center gap-4 py-4">
                           {arrayElements.map((val, idx) => {
@@ -1071,7 +1071,7 @@ student5 = 85`}
                                   className={`h-14 w-14 rounded-2xl border flex flex-col items-center justify-center font-mono transition-all duration-300 ${
                                     isSelected 
                                       ? 'border-[#8B5CF6] bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED] text-white shadow-lg shadow-[#8B5CF6]/20 font-black'
-                                      : 'border-border-color bg-[#2563EB] hover:bg-[#3B82F6] text-white font-bold'
+                                      : 'border-[#8B5CF6]/30 bg-[#8B5CF6]/10 hover:bg-[#8B5CF6]/25 hover:border-[#8B5CF6]/50 text-[#C084FC] font-bold shadow-[0_0_15px_rgba(139,92,246,0.05)]'
                                   }`}
                                 >
                                   <span className="text-[10px]">Value</span>
@@ -1088,7 +1088,7 @@ student5 = 85`}
                           <motion.div 
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full max-w-md p-4 rounded-xl border border-[#8B5CF6]/20 bg-[#8B5CF6]/5 flex flex-col gap-2.5 text-xs text-text-muted font-mono"
+                            className="w-full max-w-md p-4 rounded-xl border border-[#8B5CF6]/35 bg-[#8B5CF6]/10 shadow-[0_0_15px_rgba(139,92,246,0.06)] flex flex-col gap-2.5 text-xs text-text-muted font-mono"
                           >
                             <div className="flex justify-between items-center pb-1 border-b border-[#8B5CF6]/10 text-white font-black">
                               <span>Block details:</span>
@@ -1121,7 +1121,7 @@ student5 = 85`}
                         <p className="text-[11px] text-text-muted font-normal">Play shift-animations: Insertion, Deletion, Traversal sweeps inside contiguous cells.</p>
                       </div>
 
-                      <div className="p-4 border border-[#334155]/60 bg-black/30 rounded-[20px] text-[11px] font-mono text-text-muted text-center">
+                      <div className="p-4 border border-[#8B5CF6]/25 bg-black/40 rounded-[20px] text-[11px] font-mono text-text-muted text-center shadow-inner">
                         {animationText}
                       </div>
 
@@ -1192,7 +1192,7 @@ student5 = 85`}
                           onClick={() => setActivePatternIndex(idx)}
                           className={`px-3.5 py-2 text-[11px] font-mono font-bold cursor-pointer border-b-2 transition-all shrink-0 ${
                             activePatternIndex === idx 
-                              ? 'border-secondary text-secondary font-black' 
+                              ? 'border-[#F59E0B] text-[#F59E0B] font-black' 
                               : 'border-transparent text-text-muted hover:text-white'
                           }`}
                         >
@@ -1202,7 +1202,7 @@ student5 = 85`}
                     </div>
 
                     {/* Pattern Details Panel */}
-                    <Card className="border border-border/40">
+                    <Card className="border border-[#F59E0B]/30 bg-gradient-to-br from-[#7C2D12]/15 to-[#0F172A] rounded-[20px] shadow-[0_0_30px_rgba(245,158,11,0.12)] hover:border-[#F59E0B]/50 transition-all duration-300">
                       <CardBody className="p-5 space-y-4 text-xs font-medium">
                         {activePatternIndex === 0 && (
                           <div className="space-y-4">
@@ -1227,23 +1227,23 @@ student5 = 85`}
                               </div>
                             </div>
                             
-                            <div className="p-3 bg-secondary/5 border border-secondary/15 rounded-lg">
-                              <span className="text-[9px] font-bold text-secondary uppercase font-mono block mb-1">Concept Diagram:</span>
+                            <div className="p-3 bg-[#F59E0B]/5 border border-[#F59E0B]/20 rounded-lg">
+                              <span className="text-[9px] font-bold text-[#F59E0B] uppercase font-mono block mb-1">Concept Diagram:</span>
                               <div className="flex items-center gap-1.5 font-mono text-[10px] text-white py-1">
-                                <span className="text-secondary font-bold mr-1">Scanning:</span>
+                                <span className="text-[#FBBF24] font-bold mr-1">Scanning:</span>
                                 <div className="flex gap-1">
-                                  <div className="h-6 w-8 rounded border border-border bg-card-bg flex items-center justify-center text-secondary font-black scale-105 border-secondary">10</div>
-                                  <div className="h-6 w-8 rounded border border-border bg-card-bg flex items-center justify-center">20</div>
-                                  <div className="h-6 w-8 rounded border border-border bg-card-bg flex items-center justify-center">30</div>
-                                  <div className="h-6 w-8 rounded border border-border bg-card-bg flex items-center justify-center">40</div>
+                                  <div className="h-6 w-8 rounded border border-[#F59E0B]/40 bg-[#F59E0B]/10 flex items-center justify-center text-[#FBBF24] font-black scale-105">10</div>
+                                  <div className="h-6 w-8 rounded border border-border bg-card-bg/40 flex items-center justify-center">20</div>
+                                  <div className="h-6 w-8 rounded border border-border bg-card-bg/40 flex items-center justify-center">30</div>
+                                  <div className="h-6 w-8 rounded border border-border bg-card-bg/40 flex items-center justify-center">40</div>
                                 </div>
-                                <span className="text-secondary animate-pulse ml-2">&lt;── Pointer hops sequentially</span>
+                                <span className="text-[#FBBF24] animate-pulse ml-2">&lt;── Pointer hops sequentially</span>
                               </div>
                             </div>
                             
                             <div className="space-y-1 pt-1">
                               <span className="text-[10px] font-bold text-text-muted uppercase font-mono block">Standard Practice Problems:</span>
-                              <div className="flex flex-col gap-1 text-[11px] text-primary font-bold">
+                              <div className="flex flex-col gap-1 text-[11px] text-[#FBBF24] font-bold">
                                 <span>• Find Maximum element in Array</span>
                                 <span>• Sum of elements in Array</span>
                               </div>
@@ -1275,9 +1275,9 @@ student5 = 85`}
                             </div>
 
                             {/* Pointer interactive trace */}
-                            <div className="p-4 bg-black/20 border border-border/40 rounded-xl space-y-4">
+                            <div className="p-4 bg-[#7C2D12]/5 border border-[#F59E0B]/20 rounded-xl space-y-4 shadow-inner hover:border-[#F59E0B]/40 transition-colors duration-300">
                               <div className="flex justify-between items-center">
-                                <span className="text-[9px] font-bold text-secondary uppercase font-mono">Two Pointer Simulation: Target sum = 5</span>
+                                <span className="text-[9px] font-bold text-[#F59E0B] uppercase font-mono">Two Pointer Simulation: Target sum = 5</span>
                                 <Button
                                   size="sm"
                                   variant="ghost"
@@ -1296,11 +1296,11 @@ student5 = 85`}
                                   return (
                                     <div key={idx} className="flex flex-col items-center gap-1.5">
                                       {/* Pointer label top */}
-                                      <div className="h-4 text-[9px] font-black text-secondary font-mono">
+                                      <div className="h-4 text-[9px] font-black text-[#FBBF24] font-mono">
                                         {isL && isR ? 'L,R' : isL ? 'L' : isR ? 'R' : ''}
                                       </div>
-                                      <div className={`h-8 w-10 rounded border flex items-center justify-center font-mono font-black text-xs transition-colors duration-300 ${
-                                        isL || isR ? 'border-secondary bg-secondary/10 text-white' : 'border-border bg-card-bg/40 text-text-muted'
+                                      <div className={`h-8 w-10 rounded border flex items-center justify-center font-mono font-black text-xs transition-all duration-300 ${
+                                        isL || isR ? 'border-[#F59E0B] bg-[#F59E0B]/20 text-[#FBBF24] shadow-[0_0_10px_rgba(245,158,11,0.2)] font-black' : 'border-border bg-[#F59E0B]/5 text-text-muted'
                                       }`}>
                                         {val}
                                       </div>
@@ -1314,7 +1314,7 @@ student5 = 85`}
 
                             <div className="space-y-1">
                               <span className="text-[10px] font-bold text-text-muted uppercase font-mono block">Standard Practice Problems:</span>
-                              <div className="flex flex-col gap-1 text-[11px] text-primary font-bold">
+                              <div className="flex flex-col gap-1 text-[11px] text-[#FBBF24] font-bold">
                                 <span>• Two Sum II (Sorted input array)</span>
                                 <span>• Container with Most Water</span>
                               </div>
@@ -1346,9 +1346,9 @@ student5 = 85`}
                             </div>
 
                             {/* Sliding window interactive trace */}
-                            <div className="p-4 bg-black/20 border border-border/40 rounded-xl space-y-4">
+                            <div className="p-4 bg-[#7C2D12]/5 border border-[#F59E0B]/20 rounded-xl space-y-4 shadow-inner hover:border-[#F59E0B]/40 transition-colors duration-300">
                               <div className="flex justify-between items-center">
-                                <span className="text-[9px] font-bold text-secondary uppercase font-mono">Sliding Window: Subarray of size 3</span>
+                                <span className="text-[9px] font-bold text-[#F59E0B] uppercase font-mono">Sliding Window: Subarray of size 3</span>
                                 <Button
                                   size="sm"
                                   variant="ghost"
@@ -1367,8 +1367,8 @@ student5 = 85`}
                                     <div key={idx} className="flex flex-col items-center gap-1.5">
                                       <div className={`h-8 w-10 rounded border flex items-center justify-center font-mono font-black text-xs transition-all duration-300 ${
                                         isInWindow 
-                                          ? 'border-secondary bg-secondary/15 text-white scale-105 shadow shadow-secondary/20' 
-                                          : 'border-border bg-card-bg/40 text-text-muted'
+                                          ? 'border-[#F59E0B] bg-[#F59E0B]/20 text-[#FBBF24] scale-105 shadow-[0_0_12px_rgba(245,158,11,0.25)] font-black' 
+                                          : 'border-border bg-[#F59E0B]/5 text-text-muted'
                                       }`}>
                                         {val}
                                       </div>
@@ -1378,7 +1378,7 @@ student5 = 85`}
                                 })}
                               </div>
                               <div className="flex justify-around items-center text-[10px] font-mono text-text-muted border-t border-border/20 pt-2 font-bold">
-                                <span>Current Sum: <span className="text-secondary">{windowSum}</span></span>
+                                <span>Current Sum: <span className="text-[#FBBF24]">{windowSum}</span></span>
                                 <span>Max Sum: <span className="text-white">{windowMax}</span></span>
                               </div>
                               <p className="text-[10px] font-mono text-text-muted text-center italic">{windowStatus}</p>
@@ -1386,7 +1386,7 @@ student5 = 85`}
 
                             <div className="space-y-1">
                               <span className="text-[10px] font-bold text-text-muted uppercase font-mono block">Standard Practice Problems:</span>
-                              <div className="flex flex-col gap-1 text-[11px] text-primary font-bold">
+                              <div className="flex flex-col gap-1 text-[11px] text-[#FBBF24] font-bold">
                                 <span>• Maximum Sum Subarray of size K</span>
                                 <span>• Minimum Size Subarray Sum</span>
                               </div>
@@ -1417,8 +1417,8 @@ student5 = 85`}
                               </div>
                             </div>
 
-                            <div className="p-3 bg-secondary/5 border border-secondary/15 rounded-lg space-y-2">
-                              <span className="text-[9px] font-bold text-secondary uppercase font-mono block">Prefix Sum Mapping:</span>
+                            <div className="p-3 bg-[#F59E0B]/5 border border-[#F59E0B]/20 rounded-lg space-y-2 hover:border-[#F59E0B]/40 transition-colors duration-300">
+                              <span className="text-[9px] font-bold text-[#F59E0B] uppercase font-mono block mb-1">Prefix Sum Mapping:</span>
                               <div className="flex items-center gap-3 font-mono text-[10px] py-1 select-none">
                                 <div className="space-y-1">
                                   <span className="text-text-muted">Array:</span>
@@ -1429,14 +1429,14 @@ student5 = 85`}
                                     <div className="h-6 w-8 rounded border border-border bg-card-bg flex items-center justify-center">4</div>
                                   </div>
                                 </div>
-                                <div className="text-secondary font-black text-base self-center pt-3">↓</div>
+                                <div className="text-[#F59E0B] font-black text-base self-center pt-3">↓</div>
                                 <div className="space-y-1">
                                   <span className="text-text-muted">Prefix Sum:</span>
-                                  <div className="flex gap-1 text-secondary font-black">
-                                    <div className="h-6 w-8 rounded border border-secondary bg-secondary/10 flex items-center justify-center">1</div>
-                                    <div className="h-6 w-8 rounded border border-secondary bg-secondary/10 flex items-center justify-center">3</div>
-                                    <div className="h-6 w-8 rounded border border-secondary bg-secondary/10 flex items-center justify-center">6</div>
-                                    <div className="h-6 w-8 rounded border border-secondary bg-secondary/10 flex items-center justify-center">10</div>
+                                  <div className="flex gap-1 text-[#FBBF24] font-black">
+                                    <div className="h-6 w-8 rounded border border-[#F59E0B]/40 bg-[#F59E0B]/10 flex items-center justify-center">1</div>
+                                    <div className="h-6 w-8 rounded border border-[#F59E0B]/40 bg-[#F59E0B]/10 flex items-center justify-center">3</div>
+                                    <div className="h-6 w-8 rounded border border-[#F59E0B]/40 bg-[#F59E0B]/10 flex items-center justify-center">6</div>
+                                    <div className="h-6 w-8 rounded border border-[#F59E0B]/40 bg-[#F59E0B]/10 flex items-center justify-center">10</div>
                                   </div>
                                 </div>
                               </div>
@@ -1445,7 +1445,7 @@ student5 = 85`}
 
                             <div className="space-y-1">
                               <span className="text-[10px] font-bold text-text-muted uppercase font-mono block">Standard Practice Problems:</span>
-                              <div className="flex flex-col gap-1 text-[11px] text-primary font-bold">
+                              <div className="flex flex-col gap-1 text-[11px] text-[#FBBF24] font-bold">
                                 <span>• Range Sum Query (Immutable)</span>
                                 <span>• Subarray Sum Equals K</span>
                               </div>
@@ -1473,7 +1473,7 @@ student5 = 85`}
                           onClick={() => setActiveAlgIndex(idx)}
                           className={`px-3 py-2 text-[10px] font-mono font-bold cursor-pointer border-b-2 transition-all shrink-0 ${
                             activeAlgIndex === idx 
-                              ? 'border-primary text-primary font-black' 
+                              ? 'border-[#10B981] text-[#10B981] font-black' 
                               : 'border-transparent text-text-muted hover:text-white'
                           }`}
                         >
@@ -1482,7 +1482,7 @@ student5 = 85`}
                       ))}
                     </div>
 
-                    <Card className="border border-border/40">
+                    <Card className="border border-[#10B981]/30 bg-gradient-to-br from-[#064E3B]/15 to-[#0F172A] rounded-[20px] shadow-[0_0_30px_rgba(16,185,129,0.12)] hover:border-[#10B981]/50 transition-all duration-300">
                       <CardBody className="p-5 space-y-4 text-xs font-medium">
                         {activeAlgIndex === 0 && (
                           <div className="space-y-3">
@@ -1497,9 +1497,9 @@ student5 = 85`}
                                 <p className="text-[11px] text-text-muted font-normal">Small size input datasets or whenever items are completely unsorted.</p>
                               </div>
                             </div>
-                            <div className="p-3 bg-black/20 border border-border/20 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
+                            <div className="p-3 bg-[#064E3B]/5 border border-[#10B981]/25 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
                               <span className="text-text-muted">Complexity:</span>
-                              <span className="text-primary font-black">Time: O(n) | Space: O(1)</span>
+                              <span className="text-[#10B981] font-black">Time: O(n) | Space: O(1)</span>
                             </div>
                           </div>
                         )}
@@ -1517,9 +1517,9 @@ student5 = 85`}
                                 <p className="text-[11px] text-text-muted font-normal">Must be sorted. Invaluable for cutting runtime bounds down from linear O(n).</p>
                               </div>
                             </div>
-                            <div className="p-3 bg-black/20 border border-border/20 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
+                            <div className="p-3 bg-[#064E3B]/5 border border-[#10B981]/25 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
                               <span className="text-text-muted">Complexity:</span>
-                              <span className="text-primary font-black">Time: O(log n) | Space: O(1)</span>
+                              <span className="text-[#10B981] font-black">Time: O(log n) | Space: O(1)</span>
                             </div>
                           </div>
                         )}
@@ -1537,9 +1537,9 @@ student5 = 85`}
                                 <p className="text-[11px] text-text-muted font-normal">Subarray sum optimization that includes both positive and negative values.</p>
                               </div>
                             </div>
-                            <div className="p-3 bg-black/20 border border-border/20 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
+                            <div className="p-3 bg-[#064E3B]/5 border border-[#10B981]/25 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
                               <span className="text-text-muted">Complexity:</span>
-                              <span className="text-primary font-black">Time: O(n) | Space: O(1)</span>
+                              <span className="text-[#10B981] font-black">Time: O(n) | Space: O(1)</span>
                             </div>
                           </div>
                         )}
@@ -1557,9 +1557,9 @@ student5 = 85`}
                                 <p className="text-[11px] text-text-muted font-normal">Three-way partition sorting limits where auxiliary storage is disallowed.</p>
                               </div>
                             </div>
-                            <div className="p-3 bg-black/20 border border-border/20 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
+                            <div className="p-3 bg-[#064E3B]/5 border border-[#10B981]/25 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
                               <span className="text-text-muted">Complexity:</span>
-                              <span className="text-primary font-black">Time: O(n) | Space: O(1)</span>
+                              <span className="text-[#10B981] font-black">Time: O(n) | Space: O(1)</span>
                             </div>
                           </div>
                         )}
@@ -1577,9 +1577,9 @@ student5 = 85`}
                                 <p className="text-[11px] text-text-muted font-normal">Static arrays expecting high frequency range summation query lookups.</p>
                               </div>
                             </div>
-                            <div className="p-3 bg-black/20 border border-border/20 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
+                            <div className="p-3 bg-[#064E3B]/5 border border-[#10B981]/25 rounded-lg flex justify-between items-center text-[10px] font-mono select-none">
                               <span className="text-text-muted">Complexity:</span>
-                              <span className="text-primary font-black">Time: O(1) per lookup (after O(n) pre-computation)</span>
+                              <span className="text-[#10B981] font-black">Time: O(1) per lookup (after O(n) pre-computation)</span>
                             </div>
                           </div>
                         )}
@@ -1832,12 +1832,11 @@ public:
                       const currentQ = questionsData[activeQuestionIndex];
                       return (
                         <div className="flex flex-col items-center w-full space-y-3">
-                          
-                          {/* Flowchart step 1: Title & problem statement */}
-                          <div className="w-full max-w-xl rounded-xl border border-border/40 bg-card-bg/40 hover:border-primary/40 transition-colors shadow-md">
+                            {/* Flowchart step 1: Title & problem statement */}
+                          <div className="w-full max-w-xl rounded-xl border border-[#EF4444]/30 bg-gradient-to-br from-[#7F1D1D]/10 to-[#0F172A] hover:border-[#EF4444]/60 hover:shadow-[0_0_20px_rgba(239,68,68,0.06)] transition-all duration-300 shadow-md">
                             <div className="p-4 flex justify-between items-center gap-4">
                               <div className="flex items-center gap-2.5 min-w-0">
-                                <span className="text-[10px] font-mono font-black text-primary px-2 py-0.5 rounded bg-primary/10 border border-primary/20 shrink-0">
+                                <span className="text-[10px] font-mono font-black text-[#EF4444] px-2.5 py-0.5 rounded bg-[#EF4444]/15 border border-[#EF4444]/30 shrink-0">
                                   Q{activeQuestionIndex + 1}
                                 </span>
                                 <h4 className="text-sm font-black text-white truncate">{currentQ.title}</h4>
@@ -1846,60 +1845,60 @@ public:
                                 href={currentQ.leetcode}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-xs text-primary hover:underline font-bold shrink-0"
+                                className="text-xs text-[#EF4444] hover:underline font-bold shrink-0"
                               >
                                 Solve on Leetcode
                               </a>
                             </div>
                           </div>
 
-                          <ChevronDown className="h-5 w-5 text-primary/40 animate-pulse" />
+                          <ChevronDown className="h-5 w-5 text-[#EF4444]/40 animate-pulse" />
 
                           {/* Flowchart step 2: Understand */}
-                          <div className="w-full max-w-xl rounded-xl border border-secondary/20 bg-secondary/5 p-4">
-                            <span className="text-[9px] font-black text-secondary uppercase tracking-wider font-mono block mb-1">Step 1: Understand the Question</span>
+                          <div className="w-full max-w-xl rounded-xl border border-[#EF4444]/20 bg-[#EF4444]/5 p-4 hover:border-[#EF4444]/40 transition-colors duration-300 shadow-sm">
+                            <span className="text-[9px] font-black text-[#EF4444] uppercase tracking-wider font-mono block mb-1">Step 1: Understand the Question</span>
                             <p className="text-xs text-text-muted font-normal leading-relaxed">{currentQ.understand}</p>
                           </div>
 
-                          <ChevronDown className="h-5 w-5 text-secondary/40 animate-pulse" />
+                          <ChevronDown className="h-5 w-5 text-[#EF4444]/40 animate-pulse" />
 
                           {/* Flowchart step 3: Thinking process */}
-                          <div className="w-full max-w-xl rounded-xl border border-primary/20 bg-primary/5 p-4">
-                            <span className="text-[9px] font-black text-primary uppercase tracking-wider font-mono block mb-1">Step 2: Thinking Process</span>
+                          <div className="w-full max-w-xl rounded-xl border border-[#EF4444]/20 bg-[#EF4444]/5 p-4 hover:border-[#EF4444]/40 transition-colors duration-300 shadow-sm">
+                            <span className="text-[9px] font-black text-[#EF4444] uppercase tracking-wider font-mono block mb-1">Step 2: Thinking Process</span>
                             <p className="text-xs text-text-muted font-normal leading-relaxed">{currentQ.thinking}</p>
                           </div>
 
-                          <ChevronDown className="h-5 w-5 text-primary/40 animate-pulse" />
+                          <ChevronDown className="h-5 w-5 text-[#EF4444]/40 animate-pulse" />
 
                           {/* Flowchart step 4: Brute Force */}
-                          <div className="w-full max-w-xl rounded-xl border border-border/40 bg-black/20 p-4">
-                            <span className="text-[9px] font-black text-text-muted uppercase tracking-wider font-mono block mb-1">Step 3: Brute Force Approach</span>
+                          <div className="w-full max-w-xl rounded-xl border border-[#EF4444]/15 bg-gradient-to-br from-[#EF4444]/5 to-black/20 p-4 hover:border-[#EF4444]/35 transition-colors duration-300">
+                            <span className="text-[9px] font-black text-[#EF4444] uppercase tracking-wider font-mono block mb-1">Step 3: Brute Force Approach</span>
                             <p className="text-xs text-text-muted font-normal leading-relaxed">{currentQ.brute}</p>
                           </div>
 
-                          <ChevronDown className="h-5 w-5 text-text-muted/40 animate-pulse" />
+                          <ChevronDown className="h-5 w-5 text-[#EF4444]/40 animate-pulse" />
 
                           {/* Flowchart step 5: Optimal */}
-                          <div className="w-full max-w-xl rounded-xl border border-success/20 bg-success/5 p-4">
-                            <span className="text-[9px] font-black text-success uppercase tracking-wider font-mono block mb-1">Step 4: Optimal Approach</span>
+                          <div className="w-full max-w-xl rounded-xl border border-[#EF4444]/30 bg-[#EF4444]/10 p-4 shadow-[0_0_15px_rgba(239,68,68,0.08)] hover:border-[#EF4444]/55 transition-colors duration-300">
+                            <span className="text-[9px] font-black text-[#EF4444] uppercase tracking-wider font-mono block mb-1">Step 4: Optimal Approach</span>
                             <p className="text-xs text-text-muted font-normal leading-relaxed">{currentQ.optimal}</p>
                           </div>
 
-                          <ChevronDown className="h-5 w-5 text-success/40 animate-pulse" />
+                          <ChevronDown className="h-5 w-5 text-[#EF4444]/40 animate-pulse" />
 
                           {/* Flowchart step 6: Code switcher */}
-                          <div className="w-full max-w-xl rounded-xl overflow-hidden border border-border bg-[#03070E] shadow-xl">
-                            <div className="flex justify-between items-center bg-card-bg/60 px-4 py-2 border-b border-border/60">
+                          <div className="w-full max-w-xl rounded-xl overflow-hidden border border-[#EF4444]/20 hover:border-[#EF4444]/40 bg-[#03070E] transition-all duration-300 shadow-xl">
+                            <div className="flex justify-between items-center bg-card-bg/60 px-4 py-2 border-b border-[#EF4444]/25">
                               <span className="text-[9px] font-mono font-black text-text-muted">Step 5: Code Solution</span>
                               {/* Lang Switch */}
-                              <div className="flex rounded border border-border overflow-hidden select-none">
+                              <div className="flex rounded border border-[#EF4444]/30 overflow-hidden select-none">
                                 {['cpp', 'java', 'python'].map((l) => (
                                   <button
                                     key={l}
                                     onClick={() => setSelectedLang(l as any)}
                                     className={`px-2 py-0.5 text-[9px] font-mono font-bold cursor-pointer transition-colors ${
                                       selectedLang === l 
-                                        ? 'bg-primary text-white font-black' 
+                                        ? 'bg-[#EF4444] text-white font-black' 
                                         : 'bg-card-bg text-text-muted hover:text-white'
                                     }`}
                                   >
@@ -1909,7 +1908,7 @@ public:
                               </div>
                             </div>
                             <pre className="p-4 text-[11px] font-mono text-foreground/90 overflow-x-auto whitespace-pre">
-                              {selectedLang === 'cpp' ? currentQ.cpp : selectedLang === 'java' ? currentQ.java : currentQ.python}
+                              {selectedLang === 'cpp' ? currentQ.cpp : selectedLang === 'java' ? currentQ.java : selectedLang === 'python' ? currentQ.python : ''}
                             </pre>
                             <div className="bg-card-bg/30 px-4 py-2 text-[10px] text-text-muted font-bold font-mono border-t border-border/40 select-none flex justify-between">
                               <span>Copy Code</span>
@@ -1922,14 +1921,13 @@ public:
                             </div>
                           </div>
 
-                          <ChevronDown className="h-5 w-5 text-text-muted/40 animate-pulse" />
+                          <ChevronDown className="h-5 w-5 text-[#EF4444]/40 animate-pulse" />
 
                           {/* Flowchart step 7: Complexity */}
-                          <div className="w-full max-w-xl rounded-xl border border-border/40 bg-slate-900/50 p-4">
-                            <span className="text-[9px] font-black text-text-muted uppercase tracking-wider font-mono block mb-1">Step 6: Complexity Analysis</span>
+                          <div className="w-full max-w-xl rounded-xl border border-[#EF4444]/25 bg-gradient-to-br from-[#7F1D1D]/5 to-[#0F172A] p-4 hover:border-[#EF4444]/40 transition-colors duration-300 shadow-sm">
+                            <span className="text-[9px] font-black text-[#EF4444] uppercase tracking-wider font-mono block mb-1">Step 6: Complexity Analysis</span>
                             <p className="text-xs text-text-muted font-normal leading-relaxed">{currentQ.complexity}</p>
                           </div>
-
                         </div>
                       );
                     })()}
@@ -2023,7 +2021,7 @@ public:
                               { name: "Constant Access", desc: "Address = BaseAddress + index * ElementWidth." },
                               { name: "Static Capacity", desc: "Fixed size allocation at compilation time." }
                             ].map((prop, idx) => (
-                              <div key={idx} className="flex gap-2.5 items-start bg-white/5 border border-white/10 rounded-xl p-3">
+                              <div key={idx} className="flex gap-2.5 items-start bg-white/10 border border-white/20 shadow-md backdrop-blur-sm rounded-xl p-3 hover:bg-white/15 hover:border-white/35 hover:scale-[1.01] transition-all duration-300">
                                 <span className="h-5 w-5 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-black font-mono flex items-center justify-center shrink-0 mt-0.5">
                                   {idx + 1}
                                 </span>
@@ -2039,7 +2037,7 @@ public:
                         {/* Complexities Table */}
                         <div className="space-y-3">
                           <h3 className="text-xs font-black uppercase font-mono tracking-wider text-cyan-100">III. Time & Space Complexities</h3>
-                          <div className="bg-white/10 border border-white/20 rounded-[20px] p-4 space-y-3 font-mono text-xs">
+                          <div className="bg-white/10 border border-white/25 shadow-md backdrop-blur-sm rounded-[20px] p-4 space-y-3 font-mono text-xs hover:border-white/40 transition-all duration-300">
                             <div className="flex justify-between pb-2 border-b border-white/10">
                               <span className="font-bold">Operation</span>
                               <span className="font-bold text-cyan-200">Time Complexity</span>
@@ -2071,7 +2069,7 @@ public:
                       {/* Visual Example */}
                       <div className="space-y-3 pt-2">
                         <h3 className="text-xs font-black uppercase font-mono tracking-wider text-cyan-100">IV. Continuous Memory Representation</h3>
-                        <div className="bg-black/20 border border-white/10 rounded-[20px] p-6 flex flex-col items-center justify-center gap-3">
+                        <div className="bg-black/35 border border-white/15 shadow-inner rounded-[20px] p-6 flex flex-col items-center justify-center gap-3 hover:border-white/25 transition-all duration-300">
                           <div className="flex items-center gap-2 select-none flex-wrap justify-center">
                             {[10, 20, 30, 40].map((val, idx) => (
                               <div key={idx} className="flex flex-col items-center gap-1.5">
@@ -2090,7 +2088,7 @@ public:
                       </div>
 
                       {/* Interview Tip Banner */}
-                      <div className="p-4 bg-white/5 border border-white/10 rounded-xl space-y-1.5">
+                      <div className="p-4 bg-white/10 border border-white/20 shadow-md backdrop-blur-sm rounded-xl space-y-1.5 hover:bg-white/15 transition-all duration-300">
                         <span className="text-[9px] font-black text-cyan-200 uppercase font-mono tracking-wider block">Pro Interview Tip</span>
                         <p className="text-xs text-white/90 leading-relaxed font-normal italic">
                           If an arrays question specifies that inputs are sorted, always consider using <strong className="text-white">Two Pointers</strong> (sweeping inwards) or <strong className="text-white">Binary Search</strong> (reducing search space by half) to meet the optimal time complexity target.
@@ -2224,7 +2222,7 @@ public:
 
                       <div className="space-y-4">
                         {topic.patterns.map((pat, idx) => (
-                          <Card key={idx} className="border border-border/40">
+                          <Card key={idx} className="border border-primary/20 bg-gradient-to-br from-[#1E293B]/25 to-[#0F172A] rounded-[20px] shadow-[0_0_20px_rgba(59,130,246,0.06)] hover:border-primary/45 hover:scale-[1.01] transition-all duration-300">
                             <CardHeader className="py-3">
                               <CardTitle className="text-sm font-black text-white">{pat.name} Pattern</CardTitle>
                             </CardHeader>
@@ -2276,7 +2274,7 @@ public:
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {topic.algorithms.map((alg, idx) => (
-                          <Card key={idx} className="border border-border/40">
+                          <Card key={idx} className="border border-primary/20 bg-gradient-to-br from-[#1E293B]/25 to-[#0F172A] rounded-[20px] shadow-[0_0_20px_rgba(59,130,246,0.06)] hover:border-primary/45 hover:scale-[1.01] transition-all duration-300">
                             <CardHeader className="pb-2">
                               <CardTitle className="text-xs font-extrabold text-white">{alg.name}</CardTitle>
                             </CardHeader>
@@ -2401,7 +2399,7 @@ public:
                       <p className="text-xs text-text-muted">A quick high-density scan before entering an interview.</p>
                     </div>
 
-                    <Card className="border border-secondary/20 bg-gradient-to-br from-secondary/5 to-transparent">
+                    <Card className="border border-secondary/30 bg-gradient-to-br from-secondary/10 to-[#0B1220] rounded-[20px] shadow-[0_0_30px_rgba(139,92,246,0.1)] hover:border-secondary/50 transition-all duration-300">
                       <CardBody className="p-6">
                         <div className="space-y-4">
                           {topic.revise.points.map((point, idx) => (
