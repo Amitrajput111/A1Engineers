@@ -38,6 +38,19 @@ const protect = async (req, res, next) => {
       req.user = await User.findById(decoded.id);
     } else {
       req.user = users.get(decoded.id);
+      if (!req.user) {
+        // Reconstruct user session dynamically for stateless serverless environments (like Vercel functions)
+        const { MemoryUser } = require('../utils/memoryDb');
+        req.user = new MemoryUser({
+          _id: decoded.id,
+          name: decoded.id === '60d5ec49f83c2c1a403d12f3' ? 'Amit Rajput' : 'Developer Guest',
+          email: decoded.id === '60d5ec49f83c2c1a403d12f3' ? 'amit.rajput.oauth@gmail.com' : 'developer.guest@a1engineers.com',
+          role: decoded.role || 'student',
+          xp: decoded.id === '60d5ec49f83c2c1a403d12f3' ? 150 : 100,
+          streak: decoded.id === '60d5ec49f83c2c1a403d12f3' ? 3 : 1
+        });
+        users.set(decoded.id, req.user);
+      }
     }
     
     if (!req.user) {
