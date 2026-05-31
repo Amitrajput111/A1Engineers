@@ -2,6 +2,10 @@
 
 A1 Learner is a premium, production-ready AI-powered learning platform designed for engineering students in India. It offers structured roadmaps for Data Structures & Algorithms (DSA), Full Stack Web Development, AI/ML, and Cybersecurity, alongside a Markdown study notes vault and a Gemini-powered AI Tutor chat interface.
 
+### 🚀 Live Deployments
+* **Frontend Web App:** [https://frontend-livid-six-59.vercel.app](https://frontend-livid-six-59.vercel.app)
+* **Backend REST API:** [https://backend-ashy-ten-31.vercel.app](https://backend-ashy-ten-31.vercel.app)
+
 ---
 
 ## Technical Architecture
