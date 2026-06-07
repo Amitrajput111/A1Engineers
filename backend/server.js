@@ -119,7 +119,7 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 let server;
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+if (!process.env.VERCEL) {
   server = app.listen(PORT, () => {
     console.log(`Backend server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
   });

@@ -4,7 +4,7 @@ A1 Learner is a premium, production-ready AI-powered learning platform designed 
 
 ### 🚀 Live Deployments
 * **Frontend Web App:** [https://frontend-livid-six-59.vercel.app](https://frontend-livid-six-59.vercel.app)
-* **Backend REST API:** [https://backend-ashy-ten-31.vercel.app](https://backend-ashy-ten-31.vercel.app)
+* **Backend REST API:** [https://backend-amitrajput111s-projects.vercel.app](https://backend-amitrajput111s-projects.vercel.app)
 
 ---
 
@@ -138,5 +138,5 @@ This project is configured to run both frontend and backend on Vercel. By levera
 1. Create another project in Vercel and import the repository.
 2. Set the **Root Directory** to `frontend`.
 3. In Project Settings, ensure the Build Command is `npm run build` and the Output Directory is `.next`.
-4. Set the backend URL inside the `frontend/vercel.json` and `frontend/next.config.ts` rewrite destination property (e.g. `https://backend-ashy-ten-31.vercel.app/api/:path*`).
+4. Set the backend URL inside the `frontend/vercel.json` and `frontend/next.config.ts` rewrite destination property (e.g. `https://backend-amitrajput111s-projects.vercel.app/api/:path*`).
 5. You do **not** need to set `NEXT_PUBLIC_API_URL` on Vercel; the client automatically resolves API fetches relatively to `/api`, which proxy-routes directly to the backend through the Vercel edge.
